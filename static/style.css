@@ -1,0 +1,28 @@
+body {
+    font-family: Arial;
+    margin: 30px;
+}
+
+input {
+    padding: 5px;
+    margin: 3px;
+}
+
+button {
+    padding: 5px 10px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+th {
+    background-color: #ddd;
+}

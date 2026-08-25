@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Renda Oculta</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>Renda Oculta da Agricultura Familiar</h1>
+
+
+    <h2>Renda declarada</h2>
+
+    <form action="{{ url_for('atualizar_renda') }}" method="POST">
+
+        <input
+            type="number"
+            step="0.01"
+            name="renda_declarada"
+            placeholder="Renda declarada"
+            value="{{ renda_declarada }}"
+        >
+
+        <button type="submit">Salvar</button>
+
+    </form>
+
+
+    <h2>Adicionar produção</h2>
+
+    <form action="{{ url_for('adicionar_produto') }}" method="POST">
+
+        <p>
+            <label>Produto:</label>
+            <input
+                type="text"
+                name="nome"
+                placeholder="Ex: Milho"
+                required
+            >
+        </p>
+
+        <p>
+            <label>Preço por kg:</label>
+            <input
+                type="number"
+                step="0.01"
+                name="preco"
+                placeholder="Ex: 5.00"
+                required
+            >
+        </p>
+
+        <p>
+            <label>Autoconsumo (kg):</label>
+            <input
+                type="number"
+                step="0.01"
+                name="autoconsumo"
+                value="0"
+                required
+            >
+        </p>
+
+        <p>
+            <label>Trocas solidárias (kg):</label>
+            <input
+                type="number"
+                step="0.01"
+                name="trocas"
+                value="0"
+                required
+            >
+        </p>
+
+        <p>
+            <label>Doações (kg):</label>
+            <input
+                type="number"
+                step="0.01"
+                name="doacoes"
+                value="0"
+                required
+            >
+        </p>
+
+        <p>
+            <label>Venda informal (kg):</label>
+            <input
+                type="number"
+                step="0.01"
+                name="venda"
+                value="0"
+                required
+            >
+        </p>
+
+        <button type="submit">Adicionar</button>
+
+    </form>
+
+
+    <hr>
+
+
+    <h2>Renda oculta</h2>
+
+    <p>
+        Autoconsumo:
+        R$ {{ "%.2f"|format(total_autoconsumo) }}
+    </p>
+
+    <p>
+        Trocas solidárias:
+        R$ {{ "%.2f"|format(total_trocas) }}
+    </p>
+
+    <p>
+        Doações:
+        R$ {{ "%.2f"|format(total_doacoes) }}
+    </p>
+
+    <p>
+        Venda informal:
+        R$ {{ "%.2f"|format(total_venda) }}
+    </p>
+
+    <h3>
+        Renda oculta:
+        R$ {{ "%.2f"|format(renda_oculta) }}
+    </h3>
+
+    <h3>
+        Renda real:
+        R$ {{ "%.2f"|format(renda_real) }}
+    </h3>
+
+
+    <hr>
+
+
+    <h2>Produções cadastradas</h2>
+
+    {% if produtos %}
+
+    <table>
+
+        <tr>
+
+            <th>Produto</th>
+            <th>Preço/kg</th>
+            <th>Autoconsumo</th>
+            <th>Trocas</th>
+            <th>Doações</th>
+            <th>Venda</th>
+            <th>Remover</th>
+
+        </tr>
+
+
+        {% for p in produtos %}
+
+        <tr>
+
+            <td>{{ p.nome }}</td>
+
+            <td>
+                R$ {{ "%.2f"|format(p.preco) }}
+            </td>
+
+            <td>{{ p.autoconsumo }} kg</td>
+
+            <td>{{ p.trocas }} kg</td>
+
+            <td>{{ p.doacoes }} kg</td>
+
+            <td>{{ p.venda }} kg</td>
+
+            <td>
+
+                <form
+                    action="{{ url_for('remover_produto', produto_id=p.id) }}"
+                    method="POST"
+                >
+
+                    <button type="submit">
+                        Remover
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <p>Nenhuma produção cadastrada.</p>
+
+    {% endif %}
+
+</body>
+
+</html>
