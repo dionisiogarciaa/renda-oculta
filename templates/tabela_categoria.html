@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ categoria }} - CEASA</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-bottom: 25px;
+
+            text-decoration: none;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eaeaea;
+        }
+
+        td:first-child {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <a
+            href="{{ url_for('tabela') }}"
+            class="voltar"
+        >
+            ← Voltar para categorias
+        </a>
+
+
+        <h1>{{ categoria }}</h1>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Produto</th>
+
+                    <th>Unidade</th>
+
+                    <th>Preço mínimo</th>
+
+                    <th>Preço médio</th>
+
+                    <th>Preço máximo</th>
+
+                    <th>Preço por kg</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for produto in produtos %}
+
+                    <tr>
+
+                        <td>
+                            {{ produto.nome }}
+                        </td>
+
+                        <td>
+                            {{ produto.unidade }}
+                        </td>
+
+                        <td>
+                            R$
+                            {{ "%.2f"|format(produto.preco_min or 0) }}
+                        </td>
+
+                        <td>
+                            R$
+                            {{ "%.2f"|format(produto.preco_medio or 0) }}
+                        </td>
+
+                        <td>
+                            R$
+                            {{ "%.2f"|format(produto.preco_max or 0) }}
+                        </td>
+
+                        <td>
+                            <strong>
+                                R$
+                                {{ "%.2f"|format(produto.preco_kg) }}
+                            </strong>
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>

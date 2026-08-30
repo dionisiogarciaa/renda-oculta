@@ -1,0 +1,1559 @@
+[
+    {
+        "nome": "ABACATE",
+        "categoria": "FRUTAS",
+        "unidade": "",
+        "preco_min": 3.35,
+        "preco_medio": 3.5,
+        "preco_max": 5.0,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "ABACAXI GRANDE",
+        "categoria": "FRUTAS",
+        "unidade": "CEM",
+        "preco_min": 600.0,
+        "preco_medio": 700.0,
+        "preco_max": 700.0,
+        "preco_kg": 4.67
+    },
+    {
+        "nome": "ABACAXI MÉDIO",
+        "categoria": "FRUTAS",
+        "unidade": "CEM",
+        "preco_min": 450.0,
+        "preco_medio": 500.0,
+        "preco_max": 500.0,
+        "preco_kg": 4.17
+    },
+    {
+        "nome": "ACEROLA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25kg",
+        "preco_min": 112.5,
+        "preco_medio": 112.5,
+        "preco_max": 112.5,
+        "preco_kg": 4.5
+    },
+    {
+        "nome": "AMEIXA FRESCA IMPORTADA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.09KG",
+        "preco_min": 179.8,
+        "preco_medio": 180.0,
+        "preco_max": 185.0,
+        "preco_kg": 20.0
+    },
+    {
+        "nome": "BANANA ANÃ/NANICA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 4.5,
+        "preco_medio": 4.5,
+        "preco_max": 4.5,
+        "preco_kg": 4.5
+    },
+    {
+        "nome": "BANANA COMPRIDA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 7.0,
+        "preco_medio": 7.0,
+        "preco_max": 7.0,
+        "preco_kg": 7.0
+    },
+    {
+        "nome": "BANANA LEITE MAÇÃ",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 6.0,
+        "preco_medio": 6.0,
+        "preco_max": 6.5,
+        "preco_kg": 6.0
+    },
+    {
+        "nome": "BANANA PACOVÃN",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.0,
+        "preco_medio": 3.0,
+        "preco_max": 3.5,
+        "preco_kg": 3.0
+    },
+    {
+        "nome": "BANANA PRATA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.0,
+        "preco_medio": 3.0,
+        "preco_max": 3.5,
+        "preco_kg": 3.0
+    },
+    {
+        "nome": "CAJU",
+        "categoria": "FRUTAS",
+        "unidade": "CX PLAST.20KG",
+        "preco_min": 170.0,
+        "preco_medio": 170.0,
+        "preco_max": 170.0,
+        "preco_kg": 8.5
+    },
+    {
+        "nome": "CAQUI",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 06KG",
+        "preco_min": 65.4,
+        "preco_medio": 65.4,
+        "preco_max": 65.4,
+        "preco_kg": 10.9
+    },
+    {
+        "nome": "CÔCO SECO",
+        "categoria": "FRUTAS",
+        "unidade": "CEM",
+        "preco_min": 300.0,
+        "preco_medio": 300.0,
+        "preco_max": 350.0,
+        "preco_kg": 4.0
+    },
+    {
+        "nome": "CÔCO VERDE",
+        "categoria": "FRUTAS",
+        "unidade": "CEM",
+        "preco_min": 250.0,
+        "preco_medio": 250.0,
+        "preco_max": 300.0,
+        "preco_kg": 1.25
+    },
+    {
+        "nome": "GOIABA",
+        "categoria": "FRUTAS",
+        "unidade": "CX PLAST.18KG",
+        "preco_min": 67.5,
+        "preco_medio": 67.5,
+        "preco_max": 68.4,
+        "preco_kg": 3.75
+    },
+    {
+        "nome": "GOIABA",
+        "categoria": "FRUTAS",
+        "unidade": "CX PLAST.25KG",
+        "preco_min": 90.0,
+        "preco_medio": 90.0,
+        "preco_max": 90.0,
+        "preco_kg": 3.6
+    },
+    {
+        "nome": "GRAVIOLA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 10.0,
+        "preco_medio": 10.0,
+        "preco_max": 10.0,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "KIWI IMPORT.",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 270.0,
+        "preco_medio": 270.0,
+        "preco_max": 279.8,
+        "preco_kg": 27.0
+    },
+    {
+        "nome": "LARANJA PÊRA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 1.8,
+        "preco_medio": 2.25,
+        "preco_max": 2.8,
+        "preco_kg": 2.25
+    },
+    {
+        "nome": "LIMÃO SICILIANO",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 14KG",
+        "preco_min": 135.0,
+        "preco_medio": 135.0,
+        "preco_max": 135.0,
+        "preco_kg": 9.64
+    },
+    {
+        "nome": "LIMÃO SICILIANO",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 10.9,
+        "preco_medio": 10.9,
+        "preco_max": 10.9,
+        "preco_kg": 10.9
+    },
+    {
+        "nome": "LIMÃO TAHITI",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 60.0,
+        "preco_medio": 80.0,
+        "preco_max": 100.0,
+        "preco_kg": 4.0
+    },
+    {
+        "nome": "MAÇÃ FUJI 100 CAT I",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.09KG",
+        "preco_min": 90.0,
+        "preco_medio": 90.0,
+        "preco_max": 90.0,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "MAÇÃ FUJI 100 CAT I",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 162.0,
+        "preco_medio": 162.0,
+        "preco_max": 162.0,
+        "preco_kg": 9.0
+    },
+    {
+        "nome": "MAÇÃ FUJI 110 CAT I",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 162.0,
+        "preco_medio": 162.0,
+        "preco_max": 162.0,
+        "preco_kg": 9.0
+    },
+    {
+        "nome": "MAÇÃ FUJI 120 CAT I",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 143.64,
+        "preco_medio": 143.64,
+        "preco_max": 162.0,
+        "preco_kg": 7.98
+    },
+    {
+        "nome": "MAÇÃ FUJI 135 CAT I",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 140.4,
+        "preco_medio": 140.4,
+        "preco_max": 144.0,
+        "preco_kg": 7.8
+    },
+    {
+        "nome": "MAÇÃ FUJI 150 CAT I",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 135.0,
+        "preco_medio": 135.0,
+        "preco_max": 135.0,
+        "preco_kg": 7.5
+    },
+    {
+        "nome": "MAÇÃ FUJI 120 CAT III",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 90.0,
+        "preco_medio": 110.7,
+        "preco_max": 110.7,
+        "preco_kg": 6.15
+    },
+    {
+        "nome": "MAÇÃ FUJI 135 CAT III",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 84.6,
+        "preco_medio": 108.0,
+        "preco_max": 108.0,
+        "preco_kg": 6.0
+    },
+    {
+        "nome": "MAÇÃ FUJI 150 CAT III",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 102.6,
+        "preco_medio": 102.6,
+        "preco_max": 102.6,
+        "preco_kg": 5.7
+    },
+    {
+        "nome": "MAÇÃ GRANNY SMITH",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 15.5,
+        "preco_medio": 15.5,
+        "preco_max": 15.5,
+        "preco_kg": 15.5
+    },
+    {
+        "nome": "MAÇÃ GRANNY SMITH VERDE",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 15.0,
+        "preco_medio": 15.0,
+        "preco_max": 15.0,
+        "preco_kg": 15.0
+    },
+    {
+        "nome": "MAÇÃ PINK",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.19KG",
+        "preco_min": 195.0,
+        "preco_medio": 195.0,
+        "preco_max": 195.0,
+        "preco_kg": 10.26
+    },
+    {
+        "nome": "MAÇÃ RASIP CAT1 100",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 168.0,
+        "preco_medio": 168.0,
+        "preco_max": 168.0,
+        "preco_kg": 9.33
+    },
+    {
+        "nome": "MAÇÃ RASIP CAT1 150",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 145.0,
+        "preco_medio": 145.0,
+        "preco_max": 145.0,
+        "preco_kg": 8.06
+    },
+    {
+        "nome": "MAÇÃ RASIP CAT2 198",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 115.0,
+        "preco_medio": 115.0,
+        "preco_max": 115.0,
+        "preco_kg": 6.39
+    },
+    {
+        "nome": "MAÇÃ RASIP CAT3 120",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 112.0,
+        "preco_medio": 112.0,
+        "preco_max": 112.0,
+        "preco_kg": 6.22
+    },
+    {
+        "nome": "MAÇÃ RASIP CAT3 135",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 108.0,
+        "preco_medio": 108.0,
+        "preco_max": 108.0,
+        "preco_kg": 6.0
+    },
+    {
+        "nome": "MAÇÃ RASIP BELGALA SUP. 120",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 195.0,
+        "preco_medio": 195.0,
+        "preco_max": 195.0,
+        "preco_kg": 10.83
+    },
+    {
+        "nome": "MAÇÃ RED",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 12.5,
+        "preco_medio": 12.5,
+        "preco_max": 12.5,
+        "preco_kg": 12.5
+    },
+    {
+        "nome": "MAMÃO FORMOSA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 2.5,
+        "preco_medio": 3.2,
+        "preco_max": 3.5,
+        "preco_kg": 3.2
+    },
+    {
+        "nome": "MANGA ESPADA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 130.0,
+        "preco_medio": 130.0,
+        "preco_max": 130.0,
+        "preco_kg": 5.2
+    },
+    {
+        "nome": "MANGA KEITE",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 87.5,
+        "preco_medio": 105.0,
+        "preco_max": 125.0,
+        "preco_kg": 4.2
+    },
+    {
+        "nome": "MANGA TOMMY ATKINS",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 87.5,
+        "preco_medio": 105.0,
+        "preco_max": 125.0,
+        "preco_kg": 4.2
+    },
+    {
+        "nome": "MARACUJÁ",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 7.5,
+        "preco_medio": 7.75,
+        "preco_max": 8.0,
+        "preco_kg": 7.75
+    },
+    {
+        "nome": "MELANCIA REDONDA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 2.2,
+        "preco_medio": 2.3,
+        "preco_max": 2.5,
+        "preco_kg": 2.3
+    },
+    {
+        "nome": "MELANCIA BABY",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.2,
+        "preco_medio": 3.5,
+        "preco_max": 3.5,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "MELÃO ESPANHOL",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.5,
+        "preco_medio": 3.5,
+        "preco_max": 3.5,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "MELÃO GÁLIA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.5,
+        "preco_medio": 3.5,
+        "preco_max": 3.5,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "MELÃO JAPONÊS",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.5,
+        "preco_medio": 3.5,
+        "preco_max": 3.5,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "MELÃO PIEL SAPO",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.5,
+        "preco_medio": 3.5,
+        "preco_max": 3.5,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "MORANGO (cx.pap.bdj. 04Und.)",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 25.0,
+        "preco_medio": 30.0,
+        "preco_max": 40.0,
+        "preco_kg": 30.0
+    },
+    {
+        "nome": "MORANGUITO",
+        "categoria": "FRUTAS",
+        "unidade": "BANDEJA 200G",
+        "preco_min": 6.25,
+        "preco_medio": 6.25,
+        "preco_max": 6.25,
+        "preco_kg": 31.25
+    },
+    {
+        "nome": "PÊRA D'ANJOU IMP.",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 110.0,
+        "preco_medio": 110.0,
+        "preco_max": 118.0,
+        "preco_kg": 11.0
+    },
+    {
+        "nome": "PÊRA D'ANJOU IMP.",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.18KG",
+        "preco_min": 167.4,
+        "preco_medio": 167.4,
+        "preco_max": 167.4,
+        "preco_kg": 9.3
+    },
+    {
+        "nome": "PÊRA PORTUGUESA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 139.0,
+        "preco_medio": 139.0,
+        "preco_max": 139.0,
+        "preco_kg": 13.9
+    },
+    {
+        "nome": "TANGERINA CRAVO",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 140.0,
+        "preco_medio": 140.0,
+        "preco_max": 140.0,
+        "preco_kg": 5.6
+    },
+    {
+        "nome": "TANGERINA IMPORTADA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP. 10KG",
+        "preco_min": 79.8,
+        "preco_medio": 90.0,
+        "preco_max": 95.0,
+        "preco_kg": 9.0
+    },
+    {
+        "nome": "TANGERINA MURKOT",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP. 22KG",
+        "preco_min": 82.5,
+        "preco_medio": 92.4,
+        "preco_max": 92.4,
+        "preco_kg": 4.2
+    },
+    {
+        "nome": "UMBU CAJÁ",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 140.0,
+        "preco_medio": 140.0,
+        "preco_max": 140.0,
+        "preco_kg": 5.6
+    },
+    {
+        "nome": "UMBU SERTÃO",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 150.0,
+        "preco_medio": 150.0,
+        "preco_max": 150.0,
+        "preco_kg": 6.0
+    },
+    {
+        "nome": "UVA ITÁLIA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.20KG",
+        "preco_min": 130.0,
+        "preco_medio": 130.0,
+        "preco_max": 130.0,
+        "preco_kg": 6.5
+    },
+    {
+        "nome": "UVA ITÁLIA A GRANEL",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.20KG",
+        "preco_min": 128.0,
+        "preco_medio": 128.0,
+        "preco_max": 128.0,
+        "preco_kg": 6.4
+    },
+    {
+        "nome": "UVA NÚBIA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.20KG",
+        "preco_min": 170.0,
+        "preco_medio": 170.0,
+        "preco_max": 170.0,
+        "preco_kg": 8.5
+    },
+    {
+        "nome": "UVA NÚBIA A GRANEL",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.20KG",
+        "preco_min": 138.0,
+        "preco_medio": 138.0,
+        "preco_max": 138.0,
+        "preco_kg": 6.9
+    },
+    {
+        "nome": "UVA RUBI",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.20KG",
+        "preco_min": 190.0,
+        "preco_medio": 190.0,
+        "preco_max": 190.0,
+        "preco_kg": 9.5
+    },
+    {
+        "nome": "UVA THOMPSON EXTRA",
+        "categoria": "FRUTAS",
+        "unidade": "BANDEJA 500G",
+        "preco_min": 7.5,
+        "preco_medio": 7.5,
+        "preco_max": 8.5,
+        "preco_kg": 15.0
+    },
+    {
+        "nome": "UVA THOMPSON EXTRA",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 05KG",
+        "preco_min": 80.0,
+        "preco_medio": 80.0,
+        "preco_max": 80.0,
+        "preco_kg": 16.0
+    },
+    {
+        "nome": "UVA VITÓRIA AGRANEL",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.20KG",
+        "preco_min": 105.0,
+        "preco_medio": 105.0,
+        "preco_max": 105.0,
+        "preco_kg": 5.25
+    },
+    {
+        "nome": "UVA VITÓRIA EXTRA",
+        "categoria": "FRUTAS",
+        "unidade": "BANDEJA 500G",
+        "preco_min": 5.0,
+        "preco_medio": 5.0,
+        "preco_max": 5.0,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "UVA VITÓRIA EXTRA",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 05KG",
+        "preco_min": 50.0,
+        "preco_medio": 50.0,
+        "preco_max": 50.0,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "UVA VITÓRIA A GRANEL",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.20KG",
+        "preco_min": 105.0,
+        "preco_medio": 105.0,
+        "preco_max": 105.0,
+        "preco_kg": 5.25
+    },
+    {
+        "nome": "ACELGA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 6.5,
+        "preco_medio": 6.5,
+        "preco_max": 6.5,
+        "preco_kg": 6.5
+    },
+    {
+        "nome": "AGRIÃO",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 150G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "AIPO",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 20.0,
+        "preco_medio": 20.0,
+        "preco_max": 20.0,
+        "preco_kg": 20.0
+    },
+    {
+        "nome": "ALFACE LISA",
+        "categoria": "FRUTAS",
+        "unidade": "CEM",
+        "preco_min": 180.0,
+        "preco_medio": 180.0,
+        "preco_max": 180.0,
+        "preco_kg": 12.0
+    },
+    {
+        "nome": "ALMEIRÃO",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 2.0,
+        "preco_medio": 2.0,
+        "preco_max": 2.0,
+        "preco_kg": 20.0
+    },
+    {
+        "nome": "CEBOLINHA",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 1.8,
+        "preco_medio": 1.8,
+        "preco_max": 1.8,
+        "preco_kg": 18.0
+    },
+    {
+        "nome": "CHICÓRIA",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 150G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "COENTRO",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 15.0
+    },
+    {
+        "nome": "COUVE COMUM",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 1.8,
+        "preco_medio": 1.8,
+        "preco_max": 1.8,
+        "preco_kg": 18.0
+    },
+    {
+        "nome": "COUVE FLOR",
+        "categoria": "FRUTAS",
+        "unidade": "500G",
+        "preco_min": 14.5,
+        "preco_medio": 14.5,
+        "preco_max": 14.5,
+        "preco_kg": 29.0
+    },
+    {
+        "nome": "ESCAROLA",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 15.0
+    },
+    {
+        "nome": "ESPINAFRE",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 200G",
+        "preco_min": 2.0,
+        "preco_medio": 2.0,
+        "preco_max": 2.0,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "ESTRAGÃO",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 200G",
+        "preco_min": 5.0,
+        "preco_medio": 5.0,
+        "preco_max": 5.0,
+        "preco_kg": 25.0
+    },
+    {
+        "nome": "HORTELÃ",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 15.0
+    },
+    {
+        "nome": "REPOLHO BRANCO",
+        "categoria": "FRUTAS",
+        "unidade": "SACO 20KG",
+        "preco_min": 56.0,
+        "preco_medio": 65.0,
+        "preco_max": 70.0,
+        "preco_kg": 3.25
+    },
+    {
+        "nome": "REPOLHO ROXO",
+        "categoria": "FRUTAS",
+        "unidade": "SACO 20KG",
+        "preco_min": 90.0,
+        "preco_medio": 115.0,
+        "preco_max": 120.0,
+        "preco_kg": 5.75
+    },
+    {
+        "nome": "RÚCULA",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 15.0
+    },
+    {
+        "nome": "SALSÃO",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 2.0,
+        "preco_medio": 2.0,
+        "preco_max": 2.0,
+        "preco_kg": 20.0
+    },
+    {
+        "nome": "SALSINHA (salsa)",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 100G",
+        "preco_min": 1.8,
+        "preco_medio": 1.8,
+        "preco_max": 1.8,
+        "preco_kg": 18.0
+    },
+    {
+        "nome": "ABOBRINHA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.0,
+        "preco_medio": 3.0,
+        "preco_max": 3.0,
+        "preco_kg": 3.0
+    },
+    {
+        "nome": "BERINJELA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 4.0,
+        "preco_medio": 4.0,
+        "preco_max": 4.0,
+        "preco_kg": 4.0
+    },
+    {
+        "nome": "BRÓCOLIS",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 500G",
+        "preco_min": 11.0,
+        "preco_medio": 11.0,
+        "preco_max": 13.0,
+        "preco_kg": 22.0
+    },
+    {
+        "nome": "CHUCHU",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 44.0,
+        "preco_medio": 53.6,
+        "preco_max": 68.0,
+        "preco_kg": 2.68
+    },
+    {
+        "nome": "FEIJÃO VERDE C/ CASCA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 4.0,
+        "preco_medio": 4.0,
+        "preco_max": 4.0,
+        "preco_kg": 4.0
+    },
+    {
+        "nome": "FEIJÃO VERDE S/ CASCA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 18.0,
+        "preco_medio": 18.0,
+        "preco_max": 18.0,
+        "preco_kg": 18.0
+    },
+    {
+        "nome": "JERIMUM CABOCLO",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 4.0,
+        "preco_medio": 4.0,
+        "preco_max": 4.0,
+        "preco_kg": 4.0
+    },
+    {
+        "nome": "JERIMUM LEITE",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 1.8,
+        "preco_medio": 2.15,
+        "preco_max": 2.5,
+        "preco_kg": 2.15
+    },
+    {
+        "nome": "JILÓ",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 10.0,
+        "preco_medio": 10.0,
+        "preco_max": 10.0,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "GENGIBRE",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 6.5,
+        "preco_medio": 10.0,
+        "preco_max": 13.0,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "MANJERICÃO",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 150G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "MANJERICÃO ROXO",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 150G",
+        "preco_min": 2.0,
+        "preco_medio": 2.0,
+        "preco_max": 2.0,
+        "preco_kg": 13.33
+    },
+    {
+        "nome": "MAXIXE",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 8.0,
+        "preco_medio": 8.0,
+        "preco_max": 8.0,
+        "preco_kg": 8.0
+    },
+    {
+        "nome": "MILHO VERDE",
+        "categoria": "FRUTAS",
+        "unidade": "50 ESPIGAS",
+        "preco_min": 50.0,
+        "preco_medio": 50.0,
+        "preco_max": 50.0,
+        "preco_kg": 5.0
+    },
+    {
+        "nome": "PEPINO AODAI",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 3.0,
+        "preco_medio": 3.5,
+        "preco_max": 4.5,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "PEPINO JAPONÊS",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 6.5,
+        "preco_medio": 6.5,
+        "preco_max": 6.5,
+        "preco_kg": 6.5
+    },
+    {
+        "nome": "PIMENTÃO AMARELO/VERMELHO",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP. 10KG",
+        "preco_min": 170.0,
+        "preco_medio": 180.0,
+        "preco_max": 200.0,
+        "preco_kg": 18.0
+    },
+    {
+        "nome": "PIMENTÃO AMARELO/VERMELHO",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 22.9,
+        "preco_medio": 22.9,
+        "preco_max": 22.9,
+        "preco_kg": 22.9
+    },
+    {
+        "nome": "PIMENTÃO VERDE ESPECIAL",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 4.0,
+        "preco_medio": 4.23,
+        "preco_max": 4.38,
+        "preco_kg": 4.23
+    },
+    {
+        "nome": "PIMENTÃO VERDE EXTRA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 4.62,
+        "preco_medio": 4.62,
+        "preco_max": 4.62,
+        "preco_kg": 4.62
+    },
+    {
+        "nome": "QUIABO",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 8.0,
+        "preco_medio": 8.0,
+        "preco_max": 8.0,
+        "preco_kg": 8.0
+    },
+    {
+        "nome": "TOMATE CEREJA",
+        "categoria": "FRUTAS",
+        "unidade": "BANDEJA 180G",
+        "preco_min": 4.0,
+        "preco_medio": 4.0,
+        "preco_max": 4.0,
+        "preco_kg": 22.22
+    },
+    {
+        "nome": "TOMATE CEREJA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 22.0,
+        "preco_medio": 22.0,
+        "preco_max": 22.0,
+        "preco_kg": 22.0
+    },
+    {
+        "nome": "TOMATE EXTRA",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 25KG",
+        "preco_min": 90.0,
+        "preco_medio": 90.0,
+        "preco_max": 90.0,
+        "preco_kg": 3.6
+    },
+    {
+        "nome": "TOMATE LONGA VIDA",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 20KG",
+        "preco_min": 100.0,
+        "preco_medio": 100.0,
+        "preco_max": 100.0,
+        "preco_kg": 5.0
+    },
+    {
+        "nome": "TOMATE MÉDIA",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 25KG",
+        "preco_min": 75.0,
+        "preco_medio": 75.0,
+        "preco_max": 75.0,
+        "preco_kg": 3.0
+    },
+    {
+        "nome": "TOMATE SALADETE",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 20KG",
+        "preco_min": 60.0,
+        "preco_medio": 60.0,
+        "preco_max": 60.0,
+        "preco_kg": 3.0
+    },
+    {
+        "nome": "TOMATE SANTA ADÉLIA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 80.0,
+        "preco_medio": 80.0,
+        "preco_max": 80.0,
+        "preco_kg": 3.2
+    },
+    {
+        "nome": "TOMATE SANTA ADÉLIA",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.30KG",
+        "preco_min": 85.0,
+        "preco_medio": 90.0,
+        "preco_max": 90.0,
+        "preco_kg": 3.0
+    },
+    {
+        "nome": "VAGEM",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 9.5,
+        "preco_medio": 9.5,
+        "preco_max": 9.5,
+        "preco_kg": 9.5
+    },
+    {
+        "nome": "ALHO PORÓ",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 19.5,
+        "preco_medio": 19.5,
+        "preco_max": 19.5,
+        "preco_kg": 19.5
+    },
+    {
+        "nome": "ALHO ARGENTINO N5",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 165.0,
+        "preco_medio": 165.0,
+        "preco_max": 165.0,
+        "preco_kg": 16.5
+    },
+    {
+        "nome": "ALHO ARGENTINO N6",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 185.0,
+        "preco_medio": 185.0,
+        "preco_max": 189.0,
+        "preco_kg": 18.5
+    },
+    {
+        "nome": "ALHO NAC. N6 TOP",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 215.0,
+        "preco_medio": 215.0,
+        "preco_max": 215.0,
+        "preco_kg": 21.5
+    },
+    {
+        "nome": "ALHO NAC. N7 TOP",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 225.0,
+        "preco_medio": 225.0,
+        "preco_max": 225.0,
+        "preco_kg": 22.5
+    },
+    {
+        "nome": "ALHO ROXO NACIONAL TP06",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 170.0,
+        "preco_medio": 170.0,
+        "preco_max": 170.0,
+        "preco_kg": 17.0
+    },
+    {
+        "nome": "ALHO SORRISO N8",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PAP.10KG",
+        "preco_min": 160.0,
+        "preco_medio": 160.0,
+        "preco_max": 160.0,
+        "preco_kg": 16.0
+    },
+    {
+        "nome": "BATATA BICA",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.25KG",
+        "preco_min": 90.0,
+        "preco_medio": 90.0,
+        "preco_max": 90.0,
+        "preco_kg": 3.6
+    },
+    {
+        "nome": "BATATA DOCE",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 100.0,
+        "preco_medio": 100.0,
+        "preco_max": 112.5,
+        "preco_kg": 4.0
+    },
+    {
+        "nome": "BATATA LISA ESPECIAL",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.25KG",
+        "preco_min": 90.0,
+        "preco_medio": 90.0,
+        "preco_max": 100.0,
+        "preco_kg": 3.6
+    },
+    {
+        "nome": "BETERRABA",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 70.0,
+        "preco_medio": 70.0,
+        "preco_max": 70.0,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "BETERRABA COCAO",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 53.0,
+        "preco_medio": 53.0,
+        "preco_max": 53.0,
+        "preco_kg": 2.65
+    },
+    {
+        "nome": "CEBOLA BRANCA",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 65.0,
+        "preco_medio": 70.0,
+        "preco_max": 70.0,
+        "preco_kg": 3.5
+    },
+    {
+        "nome": "CEBOLA BRANCA CX2",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 85.0,
+        "preco_medio": 85.0,
+        "preco_max": 85.0,
+        "preco_kg": 4.25
+    },
+    {
+        "nome": "CEBOLA BRANCA CX3",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 85.0,
+        "preco_medio": 85.0,
+        "preco_max": 85.0,
+        "preco_kg": 4.25
+    },
+    {
+        "nome": "CEBOLA BRANCA CX4",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 85.0,
+        "preco_medio": 85.0,
+        "preco_max": 85.0,
+        "preco_kg": 4.25
+    },
+    {
+        "nome": "CEBOLA ROXA",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 85.0,
+        "preco_medio": 90.0,
+        "preco_max": 90.0,
+        "preco_kg": 4.5
+    },
+    {
+        "nome": "CEBOLA ROXA CX2",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 77.0,
+        "preco_medio": 77.0,
+        "preco_max": 77.0,
+        "preco_kg": 3.85
+    },
+    {
+        "nome": "CEBOLA ROXA CX3",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 82.0,
+        "preco_medio": 82.0,
+        "preco_max": 98.0,
+        "preco_kg": 4.1
+    },
+    {
+        "nome": "CENOURA",
+        "categoria": "FRUTAS",
+        "unidade": "SCO.20KG",
+        "preco_min": 100.0,
+        "preco_medio": 100.0,
+        "preco_max": 100.0,
+        "preco_kg": 5.0
+    },
+    {
+        "nome": "CENOURA AAA MINAS",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 20KG",
+        "preco_min": 100.0,
+        "preco_medio": 100.0,
+        "preco_max": 100.0,
+        "preco_kg": 5.0
+    },
+    {
+        "nome": "CENOURA GROSSA",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 20KG",
+        "preco_min": 95.0,
+        "preco_medio": 95.0,
+        "preco_max": 95.0,
+        "preco_kg": 4.75
+    },
+    {
+        "nome": "INHAME CARÁ NORDESTE",
+        "categoria": "FRUTAS",
+        "unidade": "15KG",
+        "preco_min": 60.0,
+        "preco_medio": 60.0,
+        "preco_max": 64.5,
+        "preco_kg": 4.0
+    },
+    {
+        "nome": "INHAME DA COSTA",
+        "categoria": "FRUTAS",
+        "unidade": "15KG",
+        "preco_min": 120.0,
+        "preco_medio": 135.0,
+        "preco_max": 150.0,
+        "preco_kg": 9.0
+    },
+    {
+        "nome": "MACAXEIRA (AIPIM)",
+        "categoria": "FRUTAS",
+        "unidade": "CX.PLAST.25KG",
+        "preco_min": 65.0,
+        "preco_medio": 65.0,
+        "preco_max": 65.0,
+        "preco_kg": 2.6
+    },
+    {
+        "nome": "MANDIOQUINHA",
+        "categoria": "FRUTAS",
+        "unidade": "BANDEJA 500G",
+        "preco_min": 12.5,
+        "preco_medio": 12.5,
+        "preco_max": 12.5,
+        "preco_kg": 25.0
+    },
+    {
+        "nome": "NABO",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 8.0,
+        "preco_medio": 8.0,
+        "preco_max": 8.0,
+        "preco_kg": 8.0
+    },
+    {
+        "nome": "RABANETE",
+        "categoria": "FRUTAS",
+        "unidade": "MOLHO 150G",
+        "preco_min": 1.5,
+        "preco_medio": 1.5,
+        "preco_max": 1.5,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "AÇUCAR",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 10KG",
+        "preco_min": 29.5,
+        "preco_medio": 29.5,
+        "preco_max": 29.5,
+        "preco_kg": 2.95
+    },
+    {
+        "nome": "AMEIXA SECA S/CAROÇO",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 10KG",
+        "preco_min": 295.0,
+        "preco_medio": 295.0,
+        "preco_max": 305.0,
+        "preco_kg": 29.5
+    },
+    {
+        "nome": "AMEIXA SECA S/CAROÇO",
+        "categoria": "FRUTAS",
+        "unidade": "POTE 300G",
+        "preco_min": 16.0,
+        "preco_medio": 16.0,
+        "preco_max": 16.0,
+        "preco_kg": 53.33
+    },
+    {
+        "nome": "CAFÉ STA. CLARA EXT. FORTE",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 05KG",
+        "preco_min": 262.5,
+        "preco_medio": 262.5,
+        "preco_max": 262.5,
+        "preco_kg": 52.5
+    },
+    {
+        "nome": "CAFÉ SANTA CLARA NORMAL",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 05KG",
+        "preco_min": 262.5,
+        "preco_medio": 262.5,
+        "preco_max": 262.5,
+        "preco_kg": 52.5
+    },
+    {
+        "nome": "FARINHA DE MANDIOCA",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 10KG",
+        "preco_min": 55.0,
+        "preco_medio": 55.0,
+        "preco_max": 55.0,
+        "preco_kg": 5.5
+    },
+    {
+        "nome": "FEIJÃO CARIOQUINHA",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 10KG",
+        "preco_min": 75.0,
+        "preco_medio": 75.0,
+        "preco_max": 75.0,
+        "preco_kg": 7.5
+    },
+    {
+        "nome": "FEIJÃO MACAÇAR",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 10KG",
+        "preco_min": 60.0,
+        "preco_medio": 60.0,
+        "preco_max": 60.0,
+        "preco_kg": 6.0
+    },
+    {
+        "nome": "FEIJÃO PRETO",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 10KG",
+        "preco_min": 60.0,
+        "preco_medio": 60.0,
+        "preco_max": 60.0,
+        "preco_kg": 6.0
+    },
+    {
+        "nome": "FRUTAS CRISTALIZADAS",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 10KG",
+        "preco_min": 160.0,
+        "preco_medio": 160.0,
+        "preco_max": 165.0,
+        "preco_kg": 16.0
+    },
+    {
+        "nome": "FRUTAS CRISTALIZADAS",
+        "categoria": "FRUTAS",
+        "unidade": "POTE 300G",
+        "preco_min": 9.0,
+        "preco_medio": 9.0,
+        "preco_max": 9.0,
+        "preco_kg": 30.0
+    },
+    {
+        "nome": "GOMA",
+        "categoria": "FRUTAS",
+        "unidade": "KG",
+        "preco_min": 5.0,
+        "preco_medio": 5.0,
+        "preco_max": 5.0,
+        "preco_kg": 5.0
+    },
+    {
+        "nome": "MACARRÃO",
+        "categoria": "FRUTAS",
+        "unidade": "PCT. 14UNDS.",
+        "preco_min": 35.0,
+        "preco_medio": 35.0,
+        "preco_max": 35.0,
+        "preco_kg": 5.0
+    },
+    {
+        "nome": "MEL DE ABELHA",
+        "categoria": "FRUTAS",
+        "unidade": "500ML",
+        "preco_min": 30.0,
+        "preco_medio": 30.0,
+        "preco_max": 30.0,
+        "preco_kg": 54.0
+    },
+    {
+        "nome": "OVOS CODORNA",
+        "categoria": "FRUTAS",
+        "unidade": "BAND.30UND",
+        "preco_min": 3.0,
+        "preco_medio": 3.0,
+        "preco_max": 5.5,
+        "preco_kg": 10.0
+    },
+    {
+        "nome": "OVOS CAIPIRA",
+        "categoria": "FRUTAS",
+        "unidade": "BAND.12UND",
+        "preco_min": 15.9,
+        "preco_medio": 15.9,
+        "preco_max": 15.9,
+        "preco_kg": 22.08
+    },
+    {
+        "nome": "OVOS BRANCO TIPO A (E)*",
+        "categoria": "FRUTAS",
+        "unidade": "BAND.30UND",
+        "preco_min": 14.0,
+        "preco_medio": 14.5,
+        "preco_max": 15.0,
+        "preco_kg": 8.06
+    },
+    {
+        "nome": "OVOS BRANCO TIPO A (S)*",
+        "categoria": "FRUTAS",
+        "unidade": "BAND.30UND",
+        "preco_min": 14.0,
+        "preco_medio": 14.5,
+        "preco_max": 15.0,
+        "preco_kg": 8.06
+    },
+    {
+        "nome": "OVOS VERMELHO TIPO A (E)*",
+        "categoria": "FRUTAS",
+        "unidade": "BAND.30UND",
+        "preco_min": 15.0,
+        "preco_medio": 15.0,
+        "preco_max": 16.5,
+        "preco_kg": 8.33
+    },
+    {
+        "nome": "TÃMARA",
+        "categoria": "FRUTAS",
+        "unidade": "POTE 300G",
+        "preco_min": 13.0,
+        "preco_medio": 13.0,
+        "preco_max": 13.0,
+        "preco_kg": 43.33
+    },
+    {
+        "nome": "TÂMARA JUMBO",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 05KG",
+        "preco_min": 175.0,
+        "preco_medio": 175.0,
+        "preco_max": 175.0,
+        "preco_kg": 35.0
+    },
+    {
+        "nome": "UVA PASSA SEM CAROÇO",
+        "categoria": "FRUTAS",
+        "unidade": "CAIXA 10KG",
+        "preco_min": 155.0,
+        "preco_medio": 155.0,
+        "preco_max": 165.0,
+        "preco_kg": 15.5
+    },
+    {
+        "nome": "UVA PASSA SEM CAROÇO",
+        "categoria": "FRUTAS",
+        "unidade": "PACOTE 300G",
+        "preco_min": 11.0,
+        "preco_medio": 11.0,
+        "preco_max": 11.0,
+        "preco_kg": 36.67
+    }
+]
