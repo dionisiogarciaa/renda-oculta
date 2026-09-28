@@ -113,6 +113,8 @@
 
                     <th>Preço por kg</th>
 
+                    <th>Usado no cálculo</th>
+
                 </tr>
 
             </thead>
@@ -152,6 +154,12 @@
                                 R$
                                 {{ "%.2f"|format(produto.preco_kg) }}
                             </strong>
+                        </td>
+
+                        <td>
+                            R$
+                            {{ "%.2f"|format(produto.preco_unitario) }}
+                            / {{ produto.rotulo }}
                         </td>
 
                     </tr>

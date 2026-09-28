@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Renda Oculta</title>
 
@@ -17,402 +18,600 @@
 
 <body>
 
+<div class="container">
+
     <h1>
         Renda Oculta da Agricultura Familiar
     </h1>
 
 
     <!-- ================================================= -->
+    <!-- MENSAGENS (erros de validação, aviso de reinício) -->
+    <!-- ================================================= -->
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensagem in mensagens %}
+            <p class="aviso {{ categoria }}">{{ mensagem }}</p>
+        {% endfor %}
+    {% endwith %}
+
+
+    <!-- ================================================= -->
     <!-- RENDA DECLARADA -->
     <!-- ================================================= -->
 
-    <h2>Renda declarada</h2>
+    <div class="card">
 
-    <form
-        action="{{ url_for('atualizar_renda') }}"
-        method="POST"
-    >
+        <h2>Renda declarada (mensal)</h2>
 
-        <input
-            type="number"
-            step="0.01"
-            name="renda_declarada"
-            placeholder="Renda declarada"
-            value="{{ renda_declarada }}"
+        <form
+            action="{{ url_for('atualizar_renda') }}"
+            method="POST"
         >
 
-        <button type="submit">
-            Salvar
-        </button>
+            <input
+                type="number"
+                step="0.01"
+                min="0"
+                name="renda_declarada"
+                placeholder="Renda declarada"
+                value="{{ renda_declarada }}"
+            >
 
-    </form>
+            <button type="submit">
+                Salvar
+            </button>
+
+        </form>
+
+    </div>
 
 
     <!-- ================================================= -->
     <!-- ADICIONAR PRODUÇÃO -->
     <!-- ================================================= -->
 
-    <h2>Adicionar produção</h2>
+    <div class="card">
 
-    <form
-        action="{{ url_for('adicionar_produto') }}"
-        method="POST"
-    >
+        <h2>Adicionar produção</h2>
 
-        <p>
+        <form
+            action="{{ url_for('adicionar_produto') }}"
+            method="POST"
+            id="form-producao"
+        >
 
-            <label>
-                Produto:
-            </label>
+            <p>
 
-            <input
-                type="text"
-                name="nome"
-                placeholder="Ex: Milho"
-                required
-            >
+                <label for="categoria">
+                    Categoria:
+                </label>
 
-        </p>
+                <select id="categoria" required>
 
+                    <option value="" disabled selected>
+                        Selecione uma categoria
+                    </option>
 
-        <p>
+                    {% for categoria, itens in grupos %}
 
-            <label>
-                Autoconsumo (kg):
-            </label>
+                        <option value="{{ categoria }}">
+                            {{ categoria }}
+                        </option>
 
-            <input
-                type="number"
-                step="0.01"
-                name="autoconsumo"
-                value="0"
-                required
-            >
+                    {% endfor %}
 
-        </p>
+                </select>
+
+            </p>
 
 
-        <p>
+            <p>
 
-            <label>
-                Trocas solidárias (kg):
-            </label>
+                <label for="produto">
+                    Produto:
+                </label>
 
-            <input
-                type="number"
-                step="0.01"
-                name="trocas"
-                value="0"
-                required
-            >
+                <select name="nome" id="produto" required disabled>
 
-        </p>
+                    <option value="" disabled selected>
+                        Escolha a categoria primeiro
+                    </option>
 
+                </select>
 
-        <p>
+                <span id="info-preco" class="dica"></span>
 
-            <label>
-                Doações (kg):
-            </label>
-
-            <input
-                type="number"
-                step="0.01"
-                name="doacoes"
-                value="0"
-                required
-            >
-
-        </p>
+            </p>
 
 
-        <p>
+            <p>
 
-            <label>
-                Venda informal (kg):
-            </label>
+                <label for="periodo">
+                    Período da produção:
+                </label>
 
-            <input
-                type="number"
-                step="0.01"
-                name="venda"
-                value="0"
-                required
-            >
+                <select name="periodo" id="periodo" required>
 
-        </p>
+                    {% for chave, (nome, fator) in periodos.items() %}
+
+                        <option
+                            value="{{ chave }}"
+                            {% if chave == 'mensal' %}selected{% endif %}
+                        >
+                            {{ nome }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </p>
 
 
-        <button type="submit">
-            Adicionar
-        </button>
+            <p>
 
-    </form>
+                <label for="total_produzido">
+                    Total produzido (<span class="un">kg</span>):
+                </label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    id="total_produzido"
+                    name="total_produzido"
+                    value="0"
+                    required
+                >
+
+            </p>
 
 
-    <hr>
+            <p>
+
+                <label>
+                    Autoconsumo (<span class="un">kg</span>):
+                </label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    name="autoconsumo"
+                    value="0"
+                    required
+                >
+
+            </p>
+
+
+            <p>
+
+                <label>
+                    Trocas solidárias (<span class="un">kg</span>):
+                </label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    name="trocas"
+                    value="0"
+                    required
+                >
+
+            </p>
+
+
+            <p>
+
+                <label>
+                    Doações (<span class="un">kg</span>):
+                </label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    name="doacoes"
+                    value="0"
+                    required
+                >
+
+            </p>
+
+
+            <p>
+
+                <label>
+                    Venda informal (<span class="un">kg</span>):
+                </label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    name="venda"
+                    value="0"
+                    required
+                >
+
+            </p>
+
+
+            <button type="submit">
+                Adicionar
+            </button>
+
+        </form>
+
+    </div>
 
 
     <!-- ================================================= -->
     <!-- RENDA OCULTA -->
     <!-- ================================================= -->
 
-    <h2>Renda oculta</h2>
+    <div class="card">
+
+        <h2>Renda oculta (equivalente mensal)</h2>
+
+        <p class="dica">
+            Cada produção pode ter um período diferente, então os totais
+            abaixo são convertidos para mês:
+            {% for chave, (nome, fator) in periodos.items() %}
+                {{ nome|lower }} × {{ fator }}{% if not loop.last %}, {% endif %}
+            {% endfor %}.
+        </p>
 
 
-    <p>
+        <p>
 
-        Autoconsumo:
+            Autoconsumo:
 
-        R$ {{ "%.2f"|format(total_autoconsumo) }}
+            R$ {{ "%.2f"|format(total_autoconsumo) }}
 
-    </p>
-
-
-    <p>
-
-        Trocas solidárias:
-
-        R$ {{ "%.2f"|format(total_trocas) }}
-
-    </p>
+        </p>
 
 
-    <p>
+        <p>
 
-        Doações:
+            Trocas solidárias:
 
-        R$ {{ "%.2f"|format(total_doacoes) }}
+            R$ {{ "%.2f"|format(total_trocas) }}
 
-    </p>
-
-
-    <p>
-
-        Venda informal:
-
-        R$ {{ "%.2f"|format(total_venda) }}
-
-    </p>
+        </p>
 
 
-    <h3>
+        <p>
 
-        Renda oculta:
+            Doações:
 
-        R$ {{ "%.2f"|format(renda_oculta) }}
+            R$ {{ "%.2f"|format(total_doacoes) }}
 
-    </h3>
-
-
-    <h3>
-
-        Renda real:
-
-        R$ {{ "%.2f"|format(renda_real) }}
-
-    </h3>
+        </p>
 
 
-    <hr>
+        <p>
+
+            Venda informal:
+
+            R$ {{ "%.2f"|format(total_venda) }}
+
+        </p>
+
+
+        <h3>
+
+            Renda oculta:
+
+            R$ {{ "%.2f"|format(renda_oculta) }}
+
+        </h3>
+
+
+        <h3>
+
+            Renda real:
+
+            R$ {{ "%.2f"|format(renda_real) }}
+
+        </h3>
+
+    </div>
 
 
     <!-- ================================================= -->
     <!-- LINK PARA TABELA DO CEASA -->
     <!-- ================================================= -->
 
-    <h2>Tabela de preços</h2>
+    <div class="card">
 
-    <a href="{{ url_for('tabela') }}">
-        Consultar preços do CEASA
-    </a>
+        <h2>Tabela de preços</h2>
 
+        <a href="{{ url_for('tabela') }}">
+            Consultar preços do CEASA
+        </a>
 
-    <hr>
+    </div>
 
 
     <!-- ================================================= -->
     <!-- PRODUÇÕES CADASTRADAS -->
     <!-- ================================================= -->
 
-    <h2>
-        Produções cadastradas
-    </h2>
+    <div class="card">
+
+        <h2>
+            Produções cadastradas
+        </h2>
 
 
-    {% if produtos %}
+        {% if produtos %}
 
-        <table>
+            <div class="tabela-scroll">
 
-            <tr>
-
-                <th>
-                    Produto
-                </th>
-
-                <th>
-                    Preço/kg
-                </th>
-
-                <th>
-                    Autoconsumo
-                </th>
-
-                <th>
-                    Valor
-                </th>
-
-                <th>
-                    Trocas
-                </th>
-
-                <th>
-                    Valor
-                </th>
-
-                <th>
-                    Doações
-                </th>
-
-                <th>
-                    Valor
-                </th>
-
-                <th>
-                    Venda
-                </th>
-
-                <th>
-                    Valor
-                </th>
-
-                <th>
-                    Remover
-                </th>
-
-            </tr>
-
-
-            {% for p in produtos %}
+            <table>
 
                 <tr>
 
-                    <!-- NOME -->
+                    <th>Produto</th>
 
-                    <td>
-                        {{ p.nome }}
-                    </td>
+                    <th>Período</th>
 
+                    <th>Preço de referência</th>
 
-                    <!-- PREÇO DO CEASA -->
+                    <th>Total produzido</th>
 
-                    <td>
+                    <th>Autoconsumo</th>
 
-                        R$
-                        {{ "%.2f"|format(p.preco_kg) }}
+                    <th>Valor</th>
 
-                    </td>
+                    <th>Trocas</th>
 
+                    <th>Valor</th>
 
-                    <!-- AUTOCONSUMO -->
+                    <th>Doações</th>
 
-                    <td>
-                        {{ p.autoconsumo }} kg
-                    </td>
+                    <th>Valor</th>
 
-                    <td>
+                    <th>Venda</th>
 
-                        R$
-                        {{ "%.2f"|format(
-                            p.valor_autoconsumo
-                        ) }}
+                    <th>Valor</th>
 
-                    </td>
-
-
-                    <!-- TROCAS -->
-
-                    <td>
-                        {{ p.trocas }} kg
-                    </td>
-
-                    <td>
-
-                        R$
-                        {{ "%.2f"|format(
-                            p.valor_trocas
-                        ) }}
-
-                    </td>
-
-
-                    <!-- DOAÇÕES -->
-
-                    <td>
-                        {{ p.doacoes }} kg
-                    </td>
-
-                    <td>
-
-                        R$
-                        {{ "%.2f"|format(
-                            p.valor_doacoes
-                        ) }}
-
-                    </td>
-
-
-                    <!-- VENDA -->
-
-                    <td>
-                        {{ p.venda }} kg
-                    </td>
-
-                    <td>
-
-                        R$
-                        {{ "%.2f"|format(
-                            p.valor_venda
-                        ) }}
-
-                    </td>
-
-
-                    <!-- REMOVER -->
-
-                    <td>
-
-                        <form
-                            action="{{ url_for(
-                                'remover_produto',
-                                produto_id=p.id
-                            ) }}"
-                            method="POST"
-                        >
-
-                            <button type="submit">
-                                Remover
-                            </button>
-
-                        </form>
-
-                    </td>
+                    <th>Remover</th>
 
                 </tr>
 
-            {% endfor %}
 
-        </table>
+                {% for p in produtos %}
+
+                    <tr>
+
+                        <td>
+                            {{ p.nome }}
+                        </td>
+
+                        <td>
+                            {{ p.periodo_nome }}
+                        </td>
+
+                        <td>
+                            R$ {{ "%.2f"|format(p.preco) }}
+                            / {{ p.rotulo }}
+                        </td>
+
+                        <td>
+                            {{ p.total_produzido|qtd }}
+                            {{ p.rotulo|plural }}
+                        </td>
 
 
-    {% else %}
+                        <!-- AUTOCONSUMO -->
 
-        <p>
-            Nenhuma produção cadastrada.
-        </p>
+                        <td>
+                            {{ p.autoconsumo|qtd }}
+                            {{ p.rotulo|plural }}
+                        </td>
 
-    {% endif %}
+                        <td>
+                            R$ {{ "%.2f"|format(p.valor_autoconsumo) }}
+                        </td>
 
+
+                        <!-- TROCAS -->
+
+                        <td>
+                            {{ p.trocas|qtd }}
+                            {{ p.rotulo|plural }}
+                        </td>
+
+                        <td>
+                            R$ {{ "%.2f"|format(p.valor_trocas) }}
+                        </td>
+
+
+                        <!-- DOAÇÕES -->
+
+                        <td>
+                            {{ p.doacoes|qtd }}
+                            {{ p.rotulo|plural }}
+                        </td>
+
+                        <td>
+                            R$ {{ "%.2f"|format(p.valor_doacoes) }}
+                        </td>
+
+
+                        <!-- VENDA -->
+
+                        <td>
+                            {{ p.venda|qtd }}
+                            {{ p.rotulo|plural }}
+                        </td>
+
+                        <td>
+                            R$ {{ "%.2f"|format(p.valor_venda) }}
+                        </td>
+
+
+                        <!-- REMOVER -->
+
+                        <td>
+
+                            <form
+                                action="{{ url_for(
+                                    'remover_produto',
+                                    produto_id=p.id
+                                ) }}"
+                                method="POST"
+                            >
+
+                                <button type="submit">
+                                    Remover
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+
+            </div>
+
+            <p class="dica">
+                Os valores da tabela são do período informado em cada linha.
+            </p>
+
+        {% else %}
+
+            <p>
+                Nenhuma produção cadastrada.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- NOVA PRODUÇÃO -->
+    <!-- ================================================= -->
+
+    <form
+        action="{{ url_for('nova_producao') }}"
+        method="POST"
+        onsubmit="return confirm('Isso apaga todas as produções e a renda declarada. Deseja continuar?');"
+    >
+
+        <button type="submit" class="perigo">
+            Nova produção
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- TROCA A UNIDADE (kg / unidades / molhos...) CONFORME  -->
+<!-- O PRODUTO ESCOLHIDO                                   -->
+<!-- ===================================================== -->
+
+<script>
+
+    // Produtos agrupados por categoria: [[categoria, [produtos...]], ...]
+    const grupos = {{ grupos|tojson }};
+
+    const selectCategoria = document.getElementById("categoria");
+
+    const selectProduto = document.getElementById("produto");
+
+    const info = document.getElementById("info-preco");
+
+    const form = document.getElementById("form-producao");
+
+
+    function atualizarUnidade(plural, inteiro) {
+
+        // Atualiza o texto "(kg)" de todos os rótulos
+        document.querySelectorAll(".un").forEach(function (el) {
+            el.textContent = plural;
+        });
+
+        // Produto por unidade só aceita número inteiro
+        form.querySelectorAll("input[type=number]").forEach(function (campo) {
+            campo.step = inteiro ? "1" : "0.01";
+        });
+
+    }
+
+
+    // 1) Escolheu a categoria -> mostra só os produtos dela
+    selectCategoria.addEventListener("change", function () {
+
+        const grupo = grupos.find(function (g) {
+            return g[0] === selectCategoria.value;
+        });
+
+        selectProduto.innerHTML = "";
+
+        const inicial = document.createElement("option");
+        inicial.value = "";
+        inicial.disabled = true;
+        inicial.selected = true;
+        inicial.textContent = "Selecione um produto";
+        selectProduto.appendChild(inicial);
+
+        grupo[1].forEach(function (item) {
+
+            const opcao = document.createElement("option");
+
+            opcao.value = item.nome;
+            opcao.textContent = item.nome;
+            opcao.dataset.rotulo = item.rotulo;
+            opcao.dataset.medida = item.medida;
+            opcao.dataset.preco = item.preco.toFixed(2);
+
+            selectProduto.appendChild(opcao);
+
+        });
+
+        selectProduto.disabled = false;
+
+        info.textContent = "";
+
+        atualizarUnidade("kg", false);
+
+    });
+
+
+    // 2) Escolheu o produto -> ajusta a unidade e mostra o preço
+    selectProduto.addEventListener("change", function () {
+
+        const opcao = selectProduto.selectedOptions[0];
+
+        const plurais = {{ plurais|tojson }};
+
+        const rotulo = opcao.dataset.rotulo;
+
+        atualizarUnidade(
+            plurais[rotulo] || rotulo,
+            opcao.dataset.medida === "unidade"
+        );
+
+        info.textContent =
+            "Preço de referência: R$ " + opcao.dataset.preco +
+            " / " + rotulo;
+
+    });
+
+</script>
 
 </body>
 
