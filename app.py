@@ -267,39 +267,16 @@ class Produto(db.Model):
 
         return self.venda * self.preco
 
+    @property
+    def valor_total(self):
+        """Soma dos quatro destinos: quanto essa produção representa em renda oculta."""
 
-# =========================================================
-# CONFIGURAÇÃO
-# =========================================================
-
-class Configuracao(db.Model):
-
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-
-    renda_declarada = db.Column(
-        db.Float,
-        nullable=False,
-        default=0
-    )
-
-
-def get_config():
-
-    config = Configuracao.query.first()
-
-    if config is None:
-
-        config = Configuracao(
-            renda_declarada=0
+        return (
+            self.valor_autoconsumo
+            + self.valor_trocas
+            + self.valor_doacoes
+            + self.valor_venda
         )
-
-        db.session.add(config)
-        db.session.commit()
-
-    return config
 
 
 # =========================================================
@@ -469,8 +446,6 @@ def index():
 
     produtos = Produto.query.all()
 
-    config = get_config()
-
 
     # =====================================================
     # CALCULANDO OS VALORES
@@ -511,16 +486,6 @@ def index():
     )
 
 
-    # =====================================================
-    # RENDA REAL
-    # =====================================================
-
-    renda_real = (
-        config.renda_declarada
-        + renda_oculta
-    )
-
-
     # Filtro opcional por categoria (?categoria=FRUTAS),
     # já preparado para os filtros futuros
     categoria = request.args.get("categoria")
@@ -537,10 +502,6 @@ def index():
         periodos=PERIODOS,
 
         plurais=PLURAIS,
-
-        renda_declarada=(
-            config.renda_declarada
-        ),
 
         total_autoconsumo=(
             total_autoconsumo
@@ -560,10 +521,6 @@ def index():
 
         renda_oculta=(
             renda_oculta
-        ),
-
-        renda_real=(
-            renda_real
         )
     )
 
@@ -745,40 +702,10 @@ def nova_producao():
 
     Produto.query.delete()
 
-    config = get_config()
-
-    config.renda_declarada = 0
-
     db.session.commit()
 
 
     flash("Nova produção iniciada.", "sucesso")
-
-
-    return redirect(
-        url_for("index")
-    )
-
-
-# =========================================================
-# ATUALIZAR RENDA DECLARADA
-# =========================================================
-
-@app.route(
-    "/renda-declarada",
-    methods=["POST"]
-)
-def atualizar_renda():
-
-    config = get_config()
-
-    config.renda_declarada = float(
-        request.form.get(
-            "renda_declarada"
-        ) or 0
-    )
-
-    db.session.commit()
 
 
     return redirect(

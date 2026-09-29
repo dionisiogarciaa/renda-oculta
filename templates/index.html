@@ -37,37 +37,6 @@
 
 
     <!-- ================================================= -->
-    <!-- RENDA DECLARADA -->
-    <!-- ================================================= -->
-
-    <div class="card">
-
-        <h2>Renda declarada (mensal)</h2>
-
-        <form
-            action="{{ url_for('atualizar_renda') }}"
-            method="POST"
-        >
-
-            <input
-                type="number"
-                step="0.01"
-                min="0"
-                name="renda_declarada"
-                placeholder="Renda declarada"
-                value="{{ renda_declarada }}"
-            >
-
-            <button type="submit">
-                Salvar
-            </button>
-
-        </form>
-
-    </div>
-
-
-    <!-- ================================================= -->
     <!-- ADICIONAR PRODUÇÃO -->
     <!-- ================================================= -->
 
@@ -257,14 +226,6 @@
 
         <h2>Renda oculta (equivalente mensal)</h2>
 
-        <p class="dica">
-            Cada produção pode ter um período diferente, então os totais
-            abaixo são convertidos para mês:
-            {% for chave, (nome, fator) in periodos.items() %}
-                {{ nome|lower }} × {{ fator }}{% if not loop.last %}, {% endif %}
-            {% endfor %}.
-        </p>
-
 
         <p>
 
@@ -310,15 +271,6 @@
 
         </h3>
 
-
-        <h3>
-
-            Renda real:
-
-            R$ {{ "%.2f"|format(renda_real) }}
-
-        </h3>
-
     </div>
 
 
@@ -350,143 +302,91 @@
 
         {% if produtos %}
 
-            <div class="tabela-scroll">
+            {% for p in produtos %}
 
-            <table>
+                <div class="producao">
 
-                <tr>
+                    <h3>{{ p.nome }}</h3>
 
-                    <th>Produto</th>
+                    <p class="info-producao">
+                        {{ p.periodo_nome }}
+                        &middot;
+                        {{ p.total_produzido|qtd }} {{ p.rotulo|plural }} produzidos
+                        &middot;
+                        R$ {{ "%.2f"|format(p.preco) }} / {{ p.rotulo }}
+                    </p>
 
-                    <th>Período</th>
+                    <div class="tabela-scroll">
 
-                    <th>Preço de referência</th>
+                    <table>
 
-                    <th>Total produzido</th>
+                        <tr>
 
-                    <th>Autoconsumo</th>
+                            <th>Produto</th>
 
-                    <th>Valor</th>
+                            <th>Autoconsumo</th>
 
-                    <th>Trocas</th>
+                            <th>Trocas</th>
 
-                    <th>Valor</th>
+                            <th>Doações</th>
 
-                    <th>Doações</th>
+                            <th>Venda</th>
 
-                    <th>Valor</th>
+                        </tr>
 
-                    <th>Venda</th>
+                        <tr>
 
-                    <th>Valor</th>
+                            <td>{{ p.nome }}</td>
 
-                    <th>Remover</th>
+                            <td>{{ p.autoconsumo|qtd }} {{ p.rotulo|plural }}</td>
 
-                </tr>
+                            <td>{{ p.trocas|qtd }} {{ p.rotulo|plural }}</td>
 
+                            <td>{{ p.doacoes|qtd }} {{ p.rotulo|plural }}</td>
 
-                {% for p in produtos %}
+                            <td>{{ p.venda|qtd }} {{ p.rotulo|plural }}</td>
 
-                    <tr>
+                        </tr>
 
-                        <td>
-                            {{ p.nome }}
-                        </td>
+                        <tr>
 
-                        <td>
-                            {{ p.periodo_nome }}
-                        </td>
+                            <td><strong>Valor</strong></td>
 
-                        <td>
-                            R$ {{ "%.2f"|format(p.preco) }}
-                            / {{ p.rotulo }}
-                        </td>
+                            <td>R$ {{ "%.2f"|format(p.valor_autoconsumo) }}</td>
 
-                        <td>
-                            {{ p.total_produzido|qtd }}
-                            {{ p.rotulo|plural }}
-                        </td>
+                            <td>R$ {{ "%.2f"|format(p.valor_trocas) }}</td>
 
+                            <td>R$ {{ "%.2f"|format(p.valor_doacoes) }}</td>
 
-                        <!-- AUTOCONSUMO -->
+                            <td>R$ {{ "%.2f"|format(p.valor_venda) }}</td>
 
-                        <td>
-                            {{ p.autoconsumo|qtd }}
-                            {{ p.rotulo|plural }}
-                        </td>
+                        </tr>
 
-                        <td>
-                            R$ {{ "%.2f"|format(p.valor_autoconsumo) }}
-                        </td>
+                    </table>
 
+                    </div>
 
-                        <!-- TROCAS -->
+                    <p class="valor-total">
+                        Valor total: R$ {{ "%.2f"|format(p.valor_total) }}
+                    </p>
 
-                        <td>
-                            {{ p.trocas|qtd }}
-                            {{ p.rotulo|plural }}
-                        </td>
+                    <form
+                        action="{{ url_for(
+                            'remover_produto',
+                            produto_id=p.id
+                        ) }}"
+                        method="POST"
+                    >
 
-                        <td>
-                            R$ {{ "%.2f"|format(p.valor_trocas) }}
-                        </td>
+                        <button type="submit">
+                            Remover
+                        </button>
 
+                    </form>
 
-                        <!-- DOAÇÕES -->
+                </div>
 
-                        <td>
-                            {{ p.doacoes|qtd }}
-                            {{ p.rotulo|plural }}
-                        </td>
-
-                        <td>
-                            R$ {{ "%.2f"|format(p.valor_doacoes) }}
-                        </td>
-
-
-                        <!-- VENDA -->
-
-                        <td>
-                            {{ p.venda|qtd }}
-                            {{ p.rotulo|plural }}
-                        </td>
-
-                        <td>
-                            R$ {{ "%.2f"|format(p.valor_venda) }}
-                        </td>
-
-
-                        <!-- REMOVER -->
-
-                        <td>
-
-                            <form
-                                action="{{ url_for(
-                                    'remover_produto',
-                                    produto_id=p.id
-                                ) }}"
-                                method="POST"
-                            >
-
-                                <button type="submit">
-                                    Remover
-                                </button>
-
-                            </form>
-
-                        </td>
-
-                    </tr>
-
-                {% endfor %}
-
-            </table>
-
-            </div>
-
-            <p class="dica">
-                Os valores da tabela são do período informado em cada linha.
-            </p>
+            {% endfor %}
 
         {% else %}
 

@@ -33,15 +33,14 @@ produções já cadastradas são mantidas).
 
 ## Como usar
 
-1. Informe a renda declarada (mensal).
-2. Em **Adicionar produção**, escolha o produto na lista, o período da produção
-   (semanal, quinzenal ou mensal) e o total produzido. A unidade muda conforme o
-   produto (kg, unidades, molhos, espigas, ovos...).
-3. Distribua o total entre autoconsumo, trocas, doações e venda informal
+1. Em **Adicionar produção**, escolha a categoria, depois o produto na lista, o
+   período da produção (semanal, quinzenal ou mensal) e o total produzido. A
+   unidade muda conforme o produto (kg, unidades, molhos, espigas, ovos...).
+2. Distribua o total entre autoconsumo, trocas, doações e venda informal
    (a soma não pode passar do total produzido).
-4. A **renda oculta** é mostrada em equivalente mensal
+3. A **renda oculta** é mostrada em equivalente mensal
    (semanal × 4, quinzenal × 2, mensal × 1 — ajustável em `PERIODOS` no `app.py`).
-5. **Nova produção** apaga todas as produções e a renda declarada.
+4. **Nova produção** apaga todas as produções cadastradas.
 
 ## Atualizando os preços do CEASA
 
