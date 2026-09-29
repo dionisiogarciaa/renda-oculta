@@ -1,111 +1,26 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}Tabela de preços{% endblock %}
 
-    <title>Tabela de Preços - CEASA</title>
+{% block content %}
 
-    <style>
+    <a class="link" style="padding-top: 0" href="{{ url_for('mais') }}">← Voltar</a>
 
-        * {
-            box-sizing: border-box;
-        }
+    <h1>Tabela de preços — CEASA</h1>
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
-            background-color: #f5f5f5;
-        }
+    <p class="sub">
+        Preços de referência usados no cálculo. Toque numa categoria para
+        ver os produtos.
+    </p>
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
+    <div style="margin-top: 20px">
 
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .categorias {
-            display: grid;
-            grid-template-columns: repeat(
-                auto-fit,
-                minmax(220px, 1fr)
-            );
-            gap: 20px;
-        }
-
-        .categoria {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            min-height: 100px;
-
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-
-            text-decoration: none;
-            color: #222;
-
-            font-size: 20px;
-            font-weight: bold;
-
-            transition: 0.2s;
-        }
-
-        .categoria:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-
-        .voltar {
-            display: inline-block;
-            margin-bottom: 30px;
-
-            text-decoration: none;
-            color: #333;
-        }
-
-    </style>
-</head>
-
-
-<body>
-
-    <div class="container">
-
-        <a href="{{ url_for('index') }}" class="voltar">
-            ← Voltar
-        </a>
-
-        <h1>Tabela de Preços - CEASA</h1>
-
-
-        <div class="categorias">
-
-            {% for categoria in categorias %}
-
-                <a
-                    href="{{ url_for('tabela_categoria', categoria=categoria) }}"
-                    class="categoria"
-                >
-
-                    {{ categoria }}
-
-                </a>
-
-            {% endfor %}
-
-        </div>
+        {% for categoria in categorias %}
+            <a class="menu" href="{{ url_for('tabela_categoria', categoria=categoria) }}">
+                <i>🌿</i> {{ categoria }}
+            </a>
+        {% endfor %}
 
     </div>
 
-</body>
-
-</html>
+{% endblock %}

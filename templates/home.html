@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+
+    <h1>Olá! 👋</h1>
+
+    <p class="sub">Veja o valor que sua produção gera.</p>
+
+
+    <div class="card hero" style="margin-top: 14px">
+
+        <p>Valor econômico gerado</p>
+
+        <div class="big">R$ {{ "%.2f"|format(renda_oculta) }}</div>
+
+        <p>estimativa mensal &middot; soma de todas as produções</p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="kpi">
+            <span><i class="dot" style="background: var(--cor-venda)"></i> Venda</span>
+            <b>R$ {{ "%.2f"|format(total_venda) }}</b>
+        </div>
+
+        <div class="kpi">
+            <span><i class="dot" style="background: var(--cor-autoconsumo)"></i> Autoconsumo</span>
+            <b>R$ {{ "%.2f"|format(total_autoconsumo) }}</b>
+        </div>
+
+        <div class="kpi">
+            <span><i class="dot" style="background: var(--cor-trocas)"></i> Trocas</span>
+            <b>R$ {{ "%.2f"|format(total_trocas) }}</b>
+        </div>
+
+        <div class="kpi">
+            <span><i class="dot" style="background: var(--cor-doacoes)"></i> Doações</span>
+            <b>R$ {{ "%.2f"|format(total_doacoes) }}</b>
+        </div>
+
+    </div>
+
+
+    <h2>Como sua produção circulou?</h2>
+
+    <div class="card">
+
+        <div class="bar">
+            <i style="flex: {{ total_autoconsumo }}; background: var(--cor-autoconsumo)"></i>
+            <i style="flex: {{ total_trocas }}; background: var(--cor-trocas)"></i>
+            <i style="flex: {{ total_doacoes }}; background: var(--cor-doacoes)"></i>
+            <i style="flex: {{ total_venda }}; background: var(--cor-venda)"></i>
+        </div>
+
+        <div class="leg">
+            <span><i class="dot" style="background: var(--cor-autoconsumo)"></i> Autoconsumo {{ pct_autoconsumo }}%</span>
+            <span><i class="dot" style="background: var(--cor-trocas)"></i> Trocas {{ pct_trocas }}%</span>
+            <span><i class="dot" style="background: var(--cor-doacoes)"></i> Doações {{ pct_doacoes }}%</span>
+            <span><i class="dot" style="background: var(--cor-venda)"></i> Venda {{ pct_venda }}%</span>
+        </div>
+
+    </div>
+
+
+    <a class="btn" style="margin-top: 20px" href="{{ url_for('producao') }}">
+        + Registrar produção
+    </a>
+
+
+    <h2>Últimas produções</h2>
+
+    {% if ultimas %}
+
+        <div class="card" style="padding: 4px 18px">
+
+            {% for p in ultimas %}
+
+                <div class="row">
+
+                    <span class="em">🌱</span>
+
+                    <div>
+                        <b>{{ p.nome }}</b>
+                        <small>
+                            {{ p.total_produzido|qtd }} {{ p.rotulo|plural }}
+                            &middot; R$ {{ "%.2f"|format(p.preco) }} / {{ p.rotulo }}
+                        </small>
+                    </div>
+
+                    <small class="r">{{ p.data_cadastro }}</small>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <a class="link" href="{{ url_for('producao') }}">Ver todas</a>
+
+    {% else %}
+
+        <p class="sub">Nenhuma produção cadastrada ainda.</p>
+
+    {% endif %}
+
+{% endblock %}

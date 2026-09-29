@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre{% endblock %}
+
+{% block content %}
+
+    <a class="link" style="padding-top: 0" href="{{ url_for('mais') }}">← Voltar</a>
+
+    <h1>Sobre o projeto</h1>
+
+    <div class="card" style="margin-top: 20px">
+
+        <b>Você produz muito mais do que aquilo que vende.</b>
+
+        <p class="sub">
+            Renda Oculta transforma o que a família registra em uma visão
+            clara do valor econômico da produção: autoconsumo, trocas,
+            doações e venda informal. Os preços de referência vêm do
+            boletim diário do CEASA.
+        </p>
+
+    </div>
+
+{% endblock %}

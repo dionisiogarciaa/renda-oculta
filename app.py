@@ -1,6 +1,7 @@
 import json
 import os
 import unicodedata
+from datetime import datetime
 from pathlib import Path
 
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -203,6 +204,13 @@ class Produto(db.Model):
         default=0
     )
 
+    # Data em que a produção foi cadastrada
+    criado_em = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.now
+    )
+
 
     # =====================================================
     # PREÇO E UNIDADE (VÊM DA TABELA DO CEASA)
@@ -241,6 +249,11 @@ class Produto(db.Model):
     def fator_mensal(self):
 
         return PERIODOS.get(self.periodo, PERIODOS["mensal"])[1]
+
+    @property
+    def data_cadastro(self):
+
+        return self.criado_em.strftime("%d/%m/%Y") if self.criado_em else ""
 
 
     # =====================================================
@@ -381,7 +394,7 @@ def migrar_banco():
     """
     Bancos criados antes desta versão não têm as colunas novas.
     - tabela_de_precos: é só uma cópia do JSON, então é recriada.
-    - produtos: ganha as colunas total_produzido e periodo.
+    - produtos: ganha as colunas total_produzido, periodo e criado_em.
     """
 
     inspetor = inspect(db.engine)
@@ -427,6 +440,22 @@ def migrar_banco():
                     "autoconsumo + trocas + doacoes + venda"
                 ))
 
+        if "criado_em" not in colunas:
+
+            with db.engine.begin() as conexao:
+
+                # Produções antigas não têm a data real de cadastro.
+                # Usamos a data de hoje só para não deixar o campo vazio.
+                conexao.execute(text(
+                    "ALTER TABLE produtos ADD COLUMN "
+                    "criado_em DATETIME"
+                ))
+
+                conexao.execute(text(
+                    "UPDATE produtos SET criado_em = CURRENT_TIMESTAMP "
+                    "WHERE criado_em IS NULL"
+                ))
+
 
 def inicializar_banco():
 
@@ -438,20 +467,11 @@ def inicializar_banco():
 
 
 # =========================================================
-# PÁGINA PRINCIPAL
+# TOTAIS (equivalente MENSAL, já que cada produção pode
+# ter um período diferente)
 # =========================================================
 
-@app.route("/")
-def index():
-
-    produtos = Produto.query.all()
-
-
-    # =====================================================
-    # CALCULANDO OS VALORES
-    # (convertidos para equivalente MENSAL, porque cada
-    #  produção pode ter um período diferente)
-    # =====================================================
+def calcular_totais(produtos):
 
     total_autoconsumo = sum(
         p.valor_autoconsumo * p.fator_mensal
@@ -473,11 +493,6 @@ def index():
         for p in produtos
     )
 
-
-    # =====================================================
-    # RENDA OCULTA
-    # =====================================================
-
     renda_oculta = (
         total_autoconsumo
         + total_trocas
@@ -485,44 +500,166 @@ def index():
         + total_venda
     )
 
+    def pct(valor):
+        return round(valor / renda_oculta * 100) if renda_oculta else 0
+
+    return {
+        "total_autoconsumo": total_autoconsumo,
+        "total_trocas": total_trocas,
+        "total_doacoes": total_doacoes,
+        "total_venda": total_venda,
+        "renda_oculta": renda_oculta,
+        "pct_autoconsumo": pct(total_autoconsumo),
+        "pct_trocas": pct(total_trocas),
+        "pct_doacoes": pct(total_doacoes),
+        "pct_venda": pct(total_venda),
+    }
+
+
+# =========================================================
+# INÍCIO
+# =========================================================
+
+@app.route("/")
+def home():
+
+    produtos = Produto.query.order_by(Produto.criado_em.desc(), Produto.id.desc()).all()
+
+    totais = calcular_totais(produtos)
+
+    return render_template(
+        "home.html",
+        ativo="home",
+        ultimas=produtos[:3],
+        **totais
+    )
+
+
+# =========================================================
+# PRODUÇÃO (formulário + lista de produções cadastradas)
+# =========================================================
+
+@app.route("/producao")
+def producao():
+
+    produtos = Produto.query.order_by(Produto.criado_em.desc(), Produto.id.desc()).all()
 
     # Filtro opcional por categoria (?categoria=FRUTAS),
     # já preparado para os filtros futuros
     categoria = request.args.get("categoria")
 
+    return render_template(
+        "producao.html",
+        ativo="producao",
+        produtos=produtos,
+        grupos=catalogo_por_categoria(categoria),
+        periodos=PERIODOS,
+        plurais=PLURAIS,
+    )
+
+
+# =========================================================
+# RENDA
+# =========================================================
+
+@app.route("/renda")
+def renda():
+
+    produtos = Produto.query.all()
+
+    totais = calcular_totais(produtos)
 
     return render_template(
-
-        "index.html",
-
-        produtos=produtos,
-
-        grupos=catalogo_por_categoria(categoria),
-
-        periodos=PERIODOS,
-
-        plurais=PLURAIS,
-
-        total_autoconsumo=(
-            total_autoconsumo
-        ),
-
-        total_trocas=(
-            total_trocas
-        ),
-
-        total_doacoes=(
-            total_doacoes
-        ),
-
-        total_venda=(
-            total_venda
-        ),
-
-        renda_oculta=(
-            renda_oculta
-        )
+        "renda.html",
+        ativo="renda",
+        **totais
     )
+
+
+# =========================================================
+# GRÁFICOS
+# =========================================================
+
+@app.route("/graficos")
+def graficos():
+
+    produtos = Produto.query.all()
+
+    totais = calcular_totais(produtos)
+
+    destinos = [
+        ("Autoconsumo", totais["total_autoconsumo"], "var(--cor-autoconsumo)"),
+        ("Trocas", totais["total_trocas"], "var(--cor-trocas)"),
+        ("Doações", totais["total_doacoes"], "var(--cor-doacoes)"),
+        ("Venda", totais["total_venda"], "var(--cor-venda)"),
+    ]
+
+    total = totais["renda_oculta"]
+
+    fatias = []
+    offset = 25
+
+    for nome, valor, cor in destinos:
+
+        pct = (valor / total * 100) if total else 0
+
+        fatias.append({
+            "nome": nome,
+            "valor": valor,
+            "cor": cor,
+            "pct": pct,
+            "offset": offset,
+        })
+
+        offset -= pct
+
+    maior_destino = max((d[1] for d in destinos), default=0)
+
+    # Soma por produto (um produto pode ter mais de uma produção cadastrada)
+    valor_por_produto = {}
+
+    for p in produtos:
+        valor_por_produto[p.nome] = (
+            valor_por_produto.get(p.nome, 0)
+            + p.valor_total * p.fator_mensal
+        )
+
+    ranking = sorted(
+        (
+            {"nome": nome, "valor": valor}
+            for nome, valor in valor_por_produto.items()
+        ),
+        key=lambda item: item["valor"],
+        reverse=True,
+    )[:8]
+
+    maior_produto = max((r["valor"] for r in ranking), default=0)
+
+    return render_template(
+        "graficos.html",
+        ativo="mais",
+        total=total,
+        fatias=fatias,
+        maior_destino=maior_destino,
+        ranking=ranking,
+        maior_produto=maior_produto,
+    )
+
+
+# =========================================================
+# MAIS (menu) E SOBRE
+# =========================================================
+
+@app.route("/mais")
+def mais():
+
+    return render_template("mais.html", ativo="mais")
+
+
+@app.route("/sobre")
+def sobre():
+
+    return render_template("sobre.html", ativo="mais")
 
 
 # =========================================================
@@ -563,14 +700,14 @@ def adicionar_produto():
 
         flash("Selecione um produto da lista.", "erro")
 
-        return redirect(url_for("index"))
+        return redirect(url_for("producao"))
 
 
     if periodo not in PERIODOS:
 
         flash("Selecione o período da produção.", "erro")
 
-        return redirect(url_for("index"))
+        return redirect(url_for("producao"))
 
 
     try:
@@ -593,7 +730,7 @@ def adicionar_produto():
             "erro"
         )
 
-        return redirect(url_for("index"))
+        return redirect(url_for("producao"))
 
 
     plural = PLURAIS.get(ref["rotulo"], ref["rotulo"])
@@ -603,7 +740,7 @@ def adicionar_produto():
 
         flash("Informe o total produzido.", "erro")
 
-        return redirect(url_for("index"))
+        return redirect(url_for("producao"))
 
 
     # Produtos vendidos por unidade não aceitam quantidade quebrada
@@ -616,7 +753,7 @@ def adicionar_produto():
                 "erro"
             )
 
-            return redirect(url_for("index"))
+            return redirect(url_for("producao"))
 
 
     destinado = autoconsumo + trocas + doacoes + venda
@@ -630,7 +767,7 @@ def adicionar_produto():
             "erro"
         )
 
-        return redirect(url_for("index"))
+        return redirect(url_for("producao"))
 
 
     # -----------------------------------------------------
@@ -661,7 +798,7 @@ def adicionar_produto():
 
 
     return redirect(
-        url_for("index")
+        url_for("producao")
     )
 
 
@@ -686,7 +823,7 @@ def remover_produto(produto_id):
 
 
     return redirect(
-        url_for("index")
+        url_for("producao")
     )
 
 
@@ -709,7 +846,7 @@ def nova_producao():
 
 
     return redirect(
-        url_for("index")
+        url_for("producao")
     )
 
 
@@ -734,6 +871,7 @@ def tabela():
 
     return render_template(
         "tabela.html",
+        ativo="mais",
         categorias=categorias
     )
 
@@ -764,6 +902,7 @@ def tabela_categoria(categoria):
 
     return render_template(
         "tabela_categoria.html",
+        ativo="mais",
         produtos=produtos,
         categoria=categoria
     )

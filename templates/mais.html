@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Mais{% endblock %}
+
+{% block content %}
+
+    <h1>Mais</h1>
+
+    <div style="margin-top: 20px">
+
+        <a class="menu" href="{{ url_for('graficos') }}">
+            <i>📈</i> Gráficos
+        </a>
+
+        <a class="menu" href="{{ url_for('tabela') }}">
+            <i>📋</i> Tabela de preços do CEASA
+        </a>
+
+        <a class="menu" href="{{ url_for('sobre') }}">
+            <i>ℹ️</i> Sobre o projeto
+        </a>
+
+    </div>
+
+{% endblock %}

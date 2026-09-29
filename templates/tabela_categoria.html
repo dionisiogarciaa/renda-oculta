@@ -1,124 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}{{ categoria }}{% endblock %}
 
-    <title>{{ categoria }} - CEASA</title>
+{% block content %}
 
-    <style>
+    <a class="link" style="padding-top: 0" href="{{ url_for('tabela') }}">← Voltar para categorias</a>
 
-        * {
-            box-sizing: border-box;
-        }
+    <h1>{{ categoria }}</h1>
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
-            background-color: #f5f5f5;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .voltar {
-            display: inline-block;
-            margin-bottom: 25px;
-
-            text-decoration: none;
-            color: #333;
-        }
-
-        h1 {
-            margin-bottom: 25px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-        }
-
-        th,
-        td {
-            padding: 14px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        th {
-            background-color: #eaeaea;
-        }
-
-        td:first-child {
-            text-align: left;
-            font-weight: bold;
-        }
-
-        @media (max-width: 700px) {
-
-            body {
-                padding: 15px;
-            }
-
-            table {
-                font-size: 13px;
-            }
-
-            th,
-            td {
-                padding: 8px;
-            }
-
-        }
-
-    </style>
-</head>
-
-
-<body>
-
-    <div class="container">
-
-        <a
-            href="{{ url_for('tabela') }}"
-            class="voltar"
-        >
-            ← Voltar para categorias
-        </a>
-
-
-        <h1>{{ categoria }}</h1>
-
+    <div class="tabela-scroll" style="margin-top: 16px">
 
         <table>
 
             <thead>
 
                 <tr>
-
                     <th>Produto</th>
-
                     <th>Unidade</th>
-
                     <th>Preço mínimo</th>
-
                     <th>Preço médio</th>
-
                     <th>Preço máximo</th>
-
                     <th>Preço por kg</th>
-
                     <th>Usado no cálculo</th>
-
                 </tr>
 
             </thead>
-
 
             <tbody>
 
@@ -126,41 +32,19 @@
 
                     <tr>
 
-                        <td>
-                            {{ produto.nome }}
-                        </td>
+                        <td>{{ produto.nome }}</td>
 
-                        <td>
-                            {{ produto.unidade }}
-                        </td>
+                        <td>{{ produto.unidade }}</td>
 
-                        <td>
-                            R$
-                            {{ "%.2f"|format(produto.preco_min or 0) }}
-                        </td>
+                        <td>R$ {{ "%.2f"|format(produto.preco_min or 0) }}</td>
 
-                        <td>
-                            R$
-                            {{ "%.2f"|format(produto.preco_medio or 0) }}
-                        </td>
+                        <td>R$ {{ "%.2f"|format(produto.preco_medio or 0) }}</td>
 
-                        <td>
-                            R$
-                            {{ "%.2f"|format(produto.preco_max or 0) }}
-                        </td>
+                        <td>R$ {{ "%.2f"|format(produto.preco_max or 0) }}</td>
 
-                        <td>
-                            <strong>
-                                R$
-                                {{ "%.2f"|format(produto.preco_kg) }}
-                            </strong>
-                        </td>
+                        <td><strong>R$ {{ "%.2f"|format(produto.preco_kg) }}</strong></td>
 
-                        <td>
-                            R$
-                            {{ "%.2f"|format(produto.preco_unitario) }}
-                            / {{ produto.rotulo }}
-                        </td>
+                        <td>R$ {{ "%.2f"|format(produto.preco_unitario) }} / {{ produto.rotulo }}</td>
 
                     </tr>
 
@@ -172,6 +56,4 @@
 
     </div>
 
-</body>
-
-</html>
+{% endblock %}

@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block title %}Produção{% endblock %}
+
+{% block content %}
+
+    <h1>Produção</h1>
+
+    <p class="sub">Registre o que foi produzido e como foi utilizado.</p>
+
+
+    <div class="card" style="margin-top: 16px">
+
+        <h2 style="margin-top: 0">Adicionar produção</h2>
+
+        <form
+            action="{{ url_for('adicionar_produto') }}"
+            method="POST"
+            id="form-producao"
+        >
+
+            <label for="categoria">Categoria</label>
+
+            <select id="categoria" required>
+
+                <option value="" disabled selected>
+                    Selecione uma categoria
+                </option>
+
+                {% for categoria, itens in grupos %}
+                    <option value="{{ categoria }}">{{ categoria }}</option>
+                {% endfor %}
+
+            </select>
+
+
+            <label for="produto">Produto</label>
+
+            <select name="nome" id="produto" required disabled>
+                <option value="" disabled selected>
+                    Escolha a categoria primeiro
+                </option>
+            </select>
+
+            <p class="badge" id="info-preco" style="margin-top: 8px"></p>
+
+
+            <label for="periodo">Período da produção</label>
+
+            <select name="periodo" id="periodo" required>
+
+                {% for chave, (nome, fator) in periodos.items() %}
+                    <option
+                        value="{{ chave }}"
+                        {% if chave == 'mensal' %}selected{% endif %}
+                    >
+                        {{ nome }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+
+            <label for="total_produzido">
+                Total produzido (<span class="un">kg</span>)
+            </label>
+
+            <input
+                type="number" step="0.01" min="0"
+                id="total_produzido" name="total_produzido" value="0" required
+            >
+
+
+            <h2 style="margin-bottom: 0">Destino da produção</h2>
+
+            <div class="two">
+
+                <div>
+                    <label>Autoconsumo (<span class="un">kg</span>)</label>
+                    <input type="number" step="0.01" min="0" name="autoconsumo" value="0" required>
+                </div>
+
+                <div>
+                    <label>Trocas (<span class="un">kg</span>)</label>
+                    <input type="number" step="0.01" min="0" name="trocas" value="0" required>
+                </div>
+
+                <div>
+                    <label>Doações (<span class="un">kg</span>)</label>
+                    <input type="number" step="0.01" min="0" name="doacoes" value="0" required>
+                </div>
+
+                <div>
+                    <label>Venda (<span class="un">kg</span>)</label>
+                    <input type="number" step="0.01" min="0" name="venda" value="0" required>
+                </div>
+
+            </div>
+
+
+            <button class="btn" type="submit" style="margin-top: 20px">
+                ADICIONAR PRODUÇÃO
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <h2>Produções cadastradas</h2>
+
+    {% if produtos %}
+
+        <input
+            class="busca"
+            placeholder="🔍 Buscar produto"
+            oninput="filtrarProducoes(this.value)"
+            aria-label="Buscar produto"
+        >
+
+        <div id="lista-producoes">
+
+            {% for p in produtos %}
+
+                <div class="card producao" data-nome="{{ p.nome|lower }}">
+
+                    <b style="font-size: 18px">{{ p.nome }}</b>
+
+                    <p class="sub" style="margin: 2px 0 12px">
+                        Cadastrado em {{ p.data_cadastro }}
+                        &middot; {{ p.periodo_nome }}
+                        &middot; {{ p.total_produzido|qtd }} {{ p.rotulo|plural }} produzidos
+                        &middot; R$ {{ "%.2f"|format(p.preco) }} / {{ p.rotulo }}
+                    </p>
+
+                    <div class="bar">
+                        <i style="flex: {{ p.autoconsumo }}; background: var(--cor-autoconsumo)"></i>
+                        <i style="flex: {{ p.trocas }}; background: var(--cor-trocas)"></i>
+                        <i style="flex: {{ p.doacoes }}; background: var(--cor-doacoes)"></i>
+                        <i style="flex: {{ p.venda }}; background: var(--cor-venda)"></i>
+                    </div>
+
+                    <div class="two" style="margin-top: 12px; font-size: 13px; color: var(--mut)">
+
+                        <span>
+                            Autoconsumo: {{ p.autoconsumo|qtd }} {{ p.rotulo|plural }}
+                            (R$ {{ "%.2f"|format(p.valor_autoconsumo) }})
+                        </span>
+
+                        <span>
+                            Trocas: {{ p.trocas|qtd }} {{ p.rotulo|plural }}
+                            (R$ {{ "%.2f"|format(p.valor_trocas) }})
+                        </span>
+
+                        <span>
+                            Doações: {{ p.doacoes|qtd }} {{ p.rotulo|plural }}
+                            (R$ {{ "%.2f"|format(p.valor_doacoes) }})
+                        </span>
+
+                        <span>
+                            Venda: {{ p.venda|qtd }} {{ p.rotulo|plural }}
+                            (R$ {{ "%.2f"|format(p.valor_venda) }})
+                        </span>
+
+                    </div>
+
+                    <p class="valor-total">
+                        <span class="sub">Valor total estimado:</span><br>
+                        <b style="font-size: 20px">R$ {{ "%.2f"|format(p.valor_total) }}</b>
+                    </p>
+
+                    <form
+                        action="{{ url_for('remover_produto', produto_id=p.id) }}"
+                        method="POST"
+                    >
+                        <button class="btn sec sm" type="submit">Remover</button>
+                    </form>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p class="sub">Nenhuma produção cadastrada ainda.</p>
+
+    {% endif %}
+
+
+    <form
+        action="{{ url_for('nova_producao') }}"
+        method="POST"
+        style="margin-top: 20px"
+        onsubmit="return confirm('Isso apaga todas as produções cadastradas. Deseja continuar?');"
+    >
+        <button class="btn sec perigo" type="submit">Nova produção</button>
+    </form>
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+
+    // Produtos agrupados por categoria: [[categoria, [produtos...]], ...]
+    const grupos = {{ grupos|tojson }};
+
+    const selectCategoria = document.getElementById("categoria");
+
+    const selectProduto = document.getElementById("produto");
+
+    const info = document.getElementById("info-preco");
+
+    const form = document.getElementById("form-producao");
+
+
+    function atualizarUnidade(plural, inteiro) {
+
+        document.querySelectorAll(".un").forEach(function (el) {
+            el.textContent = plural;
+        });
+
+        form.querySelectorAll("input[type=number]").forEach(function (campo) {
+            campo.step = inteiro ? "1" : "0.01";
+        });
+
+    }
+
+
+    // 1) Escolheu a categoria -> mostra só os produtos dela
+    selectCategoria.addEventListener("change", function () {
+
+        const grupo = grupos.find(function (g) {
+            return g[0] === selectCategoria.value;
+        });
+
+        selectProduto.innerHTML = "";
+
+        const inicial = document.createElement("option");
+        inicial.value = "";
+        inicial.disabled = true;
+        inicial.selected = true;
+        inicial.textContent = "Selecione um produto";
+        selectProduto.appendChild(inicial);
+
+        grupo[1].forEach(function (item) {
+
+            const opcao = document.createElement("option");
+
+            opcao.value = item.nome;
+            opcao.textContent = item.nome;
+            opcao.dataset.rotulo = item.rotulo;
+            opcao.dataset.medida = item.medida;
+            opcao.dataset.preco = item.preco.toFixed(2);
+
+            selectProduto.appendChild(opcao);
+
+        });
+
+        selectProduto.disabled = false;
+
+        info.textContent = "";
+
+        atualizarUnidade("kg", false);
+
+    });
+
+
+    // 2) Escolheu o produto -> ajusta a unidade e mostra o preço
+    selectProduto.addEventListener("change", function () {
+
+        const opcao = selectProduto.selectedOptions[0];
+
+        const plurais = {{ plurais|tojson }};
+
+        const rotulo = opcao.dataset.rotulo;
+
+        atualizarUnidade(
+            plurais[rotulo] || rotulo,
+            opcao.dataset.medida === "unidade"
+        );
+
+        info.textContent =
+            "Preço de referência: R$ " + opcao.dataset.preco +
+            " / " + rotulo;
+
+    });
+
+
+    // Busca simples entre as produções já cadastradas
+    function filtrarProducoes(texto) {
+
+        const termo = texto.trim().toLowerCase();
+
+        document.querySelectorAll("#lista-producoes .producao").forEach(function (card) {
+            card.style.display = card.dataset.nome.includes(termo) ? "" : "none";
+        });
+
+    }
+
+</script>
+
+{% endblock %}

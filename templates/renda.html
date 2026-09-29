@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Renda{% endblock %}
+
+{% block content %}
+
+    <h1>Valor gerado</h1>
+
+
+    <div class="card hero" style="margin-top: 14px">
+
+        <div class="big" style="margin-top: 0">R$ {{ "%.2f"|format(renda_oculta) }}</div>
+
+        <p>valor econômico estimado &middot; mensal</p>
+
+    </div>
+
+    <p class="sub" style="margin-bottom: 16px">
+        Nem tudo que é produzido é vendido. Parte da produção alimenta a
+        própria família, é trocada ou doada.
+    </p>
+
+    <div class="grid">
+
+        <div class="kpi" style="border-left: 6px solid var(--cor-venda)">
+            <span>Venda</span>
+            <b>R$ {{ "%.2f"|format(total_venda) }}</b>
+        </div>
+
+        <div class="kpi" style="border-left: 6px solid var(--cor-autoconsumo)">
+            <span>Autoconsumo</span>
+            <b>R$ {{ "%.2f"|format(total_autoconsumo) }}</b>
+        </div>
+
+        <div class="kpi" style="border-left: 6px solid var(--cor-trocas)">
+            <span>Trocas</span>
+            <b>R$ {{ "%.2f"|format(total_trocas) }}</b>
+        </div>
+
+        <div class="kpi" style="border-left: 6px solid var(--cor-doacoes)">
+            <span>Doações</span>
+            <b>R$ {{ "%.2f"|format(total_doacoes) }}</b>
+        </div>
+
+    </div>
+
+
+    <h2>Renda monetária</h2>
+
+    <div class="card">
+
+        <b style="font-size: 26px">R$ {{ "%.2f"|format(total_venda) }}</b>
+
+        <p class="sub">dinheiro recebido com vendas</p>
+
+        <div class="bar" style="margin-top: 14px; height: 20px">
+            <i style="flex: {{ total_venda }}; background: var(--cor-venda)"></i>
+            <i style="flex: {{ renda_oculta - total_venda }}; background: var(--ln)"></i>
+        </div>
+
+        <p class="sub" style="font-size: 13px">
+            Escuro: vendas ({{ pct_venda }}%). Claro: o restante do valor econômico.
+        </p>
+
+    </div>
+
+    <div class="card">
+        <b style="font-size: 26px">R$ {{ "%.2f"|format(renda_oculta) }}</b>
+        <p class="sub">valor econômico total</p>
+    </div>
+
+    <div class="note">
+        Autoconsumo, trocas e doações são <b>economia estimada</b>, não
+        dinheiro recebido. Os valores usam o preço de referência do
+        boletim do CEASA.
+    </div>
+
+    <a class="btn" style="margin-top: 14px" href="{{ url_for('graficos') }}">
+        Ver gráficos
+    </a>
+
+{% endblock %}

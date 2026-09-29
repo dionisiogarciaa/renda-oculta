@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>{% block title %}Renda Oculta{% endblock %} — Renda Oculta</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div id="app">
+
+    <div class="brand">
+        <div class="logo">🌱</div>
+        <div>
+            Renda Oculta
+            <small>Da produção à valorização</small>
+        </div>
+    </div>
+
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensagem in mensagens %}
+            <p class="alert {{ 'bad' if categoria == 'erro' else 'ok' }}">
+                {{ mensagem }}
+            </p>
+        {% endfor %}
+    {% endwith %}
+
+
+    {% block content %}{% endblock %}
+
+</div>
+
+
+<nav>
+    <div>
+
+        <a
+            href="{{ url_for('home') }}"
+            class="{{ 'on' if ativo == 'home' else '' }}"
+        >
+            <span>🏡</span>
+            Início
+        </a>
+
+        <a
+            href="{{ url_for('producao') }}"
+            class="{{ 'on' if ativo == 'producao' else '' }}"
+        >
+            <span>🥬</span>
+            Produção
+        </a>
+
+        <a
+            href="{{ url_for('renda') }}"
+            class="{{ 'on' if ativo == 'renda' else '' }}"
+        >
+            <span>💰</span>
+            Renda
+        </a>
+
+        <a
+            href="{{ url_for('mais') }}"
+            class="{{ 'on' if ativo == 'mais' else '' }}"
+        >
+            <span>⋯</span>
+            Mais
+        </a>
+
+    </div>
+</nav>
+
+
+{% block script %}{% endblock %}
+
+</body>
+
+</html>
