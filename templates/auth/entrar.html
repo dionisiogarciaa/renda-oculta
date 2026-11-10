@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Entrar{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <div class="pagina-cab">
+        <h1>Entrar</h1>
+        <p>Use o e-mail ou o telefone da sua conta.</p>
+    </div>
+    <section class="card-rc">
+        <form method="POST" action="">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="mb-3">
+                <label class="form-label" for="login">E-mail ou telefone</label>
+                <input class="form-control" id="login" name="login" autocomplete="username" inputmode="email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="senha">Senha</label>
+                <input class="form-control" id="senha" name="senha" type="password" autocomplete="current-password" required>
+            </div>
+            <button class="btn btn-rc w-100" type="submit">Entrar</button>
+        </form>
+        <p class="mt-3 mb-1"><a href="{{ url_for('auth.recuperar') }}">Esqueci minha senha</a></p>
+        <p class="mb-0">Ainda não tem conta? <a href="{{ url_for('auth.cadastro') }}">Criar conta</a></p>
+    </section>
+</div>
+{% endblock %}

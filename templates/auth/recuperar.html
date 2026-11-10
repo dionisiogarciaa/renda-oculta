@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Recuperar acesso{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <div class="pagina-cab">
+        <h1>Recuperar acesso</h1>
+        <p>Informe o e-mail ou telefone da conta para criar uma nova senha.</p>
+    </div>
+    <section class="card-rc">
+        <form method="POST" action="{{ url_for('auth.recuperar') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="mb-3">
+                <label class="form-label" for="login">E-mail ou telefone</label>
+                <input class="form-control" id="login" name="login" required>
+            </div>
+            <button class="btn btn-rc w-100" type="submit">Enviar instruções</button>
+        </form>
+        {% if link %}
+            <div class="nota mt-3">
+                <b>Modo de demonstração:</b> como o sistema ainda não envia e-mail/SMS,
+                o link aparece aqui. Ele vale por 1 hora.
+                <div class="link-copiavel mt-2"><a href="{{ link }}">{{ link }}</a></div>
+            </div>
+        {% endif %}
+        <p class="mt-3 mb-0"><a href="{{ url_for('auth.entrar') }}">Voltar para entrar</a></p>
+    </section>
+</div>
+{% endblock %}

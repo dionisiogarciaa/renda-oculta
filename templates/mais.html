@@ -1,25 +1,69 @@
 {% extends "base.html" %}
+{% from "_icones.html" import icone %}
 
 {% block title %}Mais{% endblock %}
 
 {% block content %}
 
-    <h1>Mais</h1>
+    <div class="pagina-cab">
+        <h1>Mais</h1>
+        <p>Gráficos, preços de referência e informações do projeto.</p>
+    </div>
 
-    <div style="margin-top: 20px">
+    <div class="row">
+        <div class="col-lg-7">
 
-        <a class="menu" href="{{ url_for('graficos') }}">
-            <i>📈</i> Gráficos
-        </a>
+            <a class="menu-item" href="{{ url_for('main.graficos') }}">
+                <span class="icone">{{ icone("grafico") }}</span>
+                <span>Gráficos<small>Destino da produção e valor por produto</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
 
-        <a class="menu" href="{{ url_for('tabela') }}">
-            <i>📋</i> Tabela de preços do CEASA
-        </a>
+            <a class="menu-item" href="{{ url_for('tabelas.tabela') }}">
+                <span class="icone">{{ icone("tabela") }}</span>
+                <span>Tabela de preços do CEASA<small>Preços usados no cálculo</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
 
-        <a class="menu" href="{{ url_for('sobre') }}">
-            <i>ℹ️</i> Sobre o projeto
-        </a>
+            <a class="menu-item" href="{{ url_for('relatorios.calendario') }}">
+                <span class="icone">{{ icone("tabela") }}</span>
+                <span>Calendário produtivo<small>Produção listada por mês</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
 
+            <a class="menu-item" href="{{ url_for('relatorios.relatorio') }}">
+                <span class="icone">{{ icone("grafico") }}</span>
+                <span>Relatórios<small>Comparar meses, gerar PDF e compartilhar</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
+
+            <a class="menu-item" href="{{ url_for('meus.listar') }}">
+                <span class="icone">{{ icone("producao") }}</span>
+                <span>Meus produtos<small>Crie produtos, unidades e preços próprios</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
+
+            <a class="menu-item" href="{{ url_for('perfil.ver') }}">
+                <span class="icone">{{ icone("info") }}</span>
+                <span>Perfil e conta<small>Dados pessoais, lembrete, exportar e excluir</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
+
+            {% if g.user.papel == 'agregador' %}
+            <a class="menu-item" href="{{ url_for('agregado.ver') }}">
+                <span class="icone">{{ icone("mais") }}</span>
+                <span>Visão agregada<small>Dados anônimos das famílias</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
+
+            {% endif %}
+            <a class="menu-item" href="{{ url_for('main.sobre') }}">
+                <span class="icone">{{ icone("info") }}</span>
+                <span>Sobre o projeto<small>Para que serve o Renda Oculta</small></span>
+                <span class="seta">{{ icone("seta", 18) }}</span>
+            </a>
+
+        </div>
     </div>
 
 {% endblock %}

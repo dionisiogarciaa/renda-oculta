@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block title %}Calendário produtivo{% endblock %}
+{% block content %}
+<a class="voltar" href="{{ url_for('main.mais') }}">{{ icone("voltar", 18) }} Voltar</a>
+<div class="pagina-cab">
+    <h1>Calendário produtivo</h1>
+    <p>O que foi produzido em cada mês.</p>
+</div>
+
+{% if resumo %}
+<div class="accordion" id="meses">
+    {% for m in resumo %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button {{ '' if loop.first else 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#m{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}">
+                <span class="me-auto fw-bold">{{ m.nome|capitalize }}</span>
+                <span class="muda pequeno me-3">{{ m.n }} produç{{ 'ão' if m.n == 1 else 'ões' }} · R$ {{ m.valor|brl }}</span>
+            </button>
+        </h2>
+        <div id="m{{ loop.index }}" class="accordion-collapse collapse {{ 'show' if loop.first }}" data-bs-parent="#meses">
+            <div class="accordion-body">
+                {% for p in m.itens %}
+                    <div class="item-lista">
+                        <span class="icone">{{ icone("producao", 20) }}</span>
+                        <div class="corpo"><b>{{ p.nome }}</b><small>{{ p.total_produzido|qtd }} {{ p.rotulo|plural }} · {{ p.periodo_nome }}</small></div>
+                        <div class="fim">R$ {{ p.valor_total|brl }}<small>estimado</small></div>
+                    </div>
+                {% endfor %}
+                <a class="btn btn-rc-sec btn-sm mt-3" href="{{ url_for('relatorios.relatorio', mes=m.mes) }}">Ver relatório do mês</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <div class="vazio">Nenhuma produção registrada ainda.</div>
+{% endif %}
+{% endblock %}

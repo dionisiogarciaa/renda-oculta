@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Nova senha{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <div class="pagina-cab"><h1>Nova senha</h1></div>
+    <section class="card-rc">
+        <form method="POST" action="">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="mb-3">
+                <label class="form-label" for="senha">Nova senha (mínimo 8 caracteres)</label>
+                <input class="form-control" id="senha" name="senha" type="password" autocomplete="new-password" minlength="8" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="senha2">Repita a senha</label>
+                <input class="form-control" id="senha2" name="senha2" type="password" autocomplete="new-password" minlength="8" required>
+            </div>
+            <button class="btn btn-rc w-100" type="submit">Salvar senha</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

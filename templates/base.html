@@ -1,91 +1,86 @@
+{% from "_icones.html" import icone %}
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#123524">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {% if g.user %}<meta name="user-id" content="{{ g.user.id }}">{% endif %}
+    <link rel="manifest" href="{{ url_for('pwa.manifest') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192.png') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title>{% block title %}Renda Oculta{% endblock %} — Renda Oculta</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+    {# Bootstrap, Chart.js e a fonte ficam em static/vendor: funciona sem internet #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 <body>
 
-<div id="app">
-
-    <div class="brand">
-        <div class="logo">🌱</div>
-        <div>
-            Renda Oculta
-            <small>Da produção à valorização</small>
-        </div>
+<header class="topo">
+    <div class="container px-3 d-flex align-items-center justify-content-between">
+        <a class="marca" href="{{ url_for('main.home') }}">
+            <span class="marca-logo">{{ icone("folha", 22) }}</span>
+            <span>
+                Renda Oculta
+                <small>Da produção à valorização</small>
+            </span>
+        </a>
+        {% if g.user %}
+            <a class="avatar" href="{{ url_for('perfil.ver') }}" aria-label="Perfil de {{ g.user.nome }}">{{ g.user.nome[:1]|upper }}</a>
+        {% endif %}
     </div>
+</header>
 
+
+<main class="container px-3 pagina">
 
     {% with mensagens = get_flashed_messages(with_categories=true) %}
         {% for categoria, mensagem in mensagens %}
-            <p class="alert {{ 'bad' if categoria == 'erro' else 'ok' }}">
+            <div class="alert {{ 'alert-bad' if categoria == 'erro' else 'alert-ok' }}" role="alert">
                 {{ mensagem }}
-            </p>
+            </div>
         {% endfor %}
     {% endwith %}
 
-
     {% block content %}{% endblock %}
 
-</div>
+</main>
 
 
-<nav>
-    <div>
+{% if g.user %}
+<nav class="dock" aria-label="Navegação principal">
+    <div class="dock-lista">
 
-        <a
-            href="{{ url_for('home') }}"
-            class="{{ 'on' if ativo == 'home' else '' }}"
-        >
-            <span>🏡</span>
-            Início
+        <a href="{{ url_for('main.home') }}" class="{{ 'on' if ativo == 'home' else '' }}">
+            {{ icone("home") }} Início
         </a>
 
-        <a
-            href="{{ url_for('producao') }}"
-            class="{{ 'on' if ativo == 'producao' else '' }}"
-        >
-            <span>🥬</span>
-            Produção
+        <a href="{{ url_for('producao.listar') }}" class="{{ 'on' if ativo == 'producao' else '' }}">
+            {{ icone("producao") }} Produção
         </a>
 
-        <a
-            href="{{ url_for('renda') }}"
-            class="{{ 'on' if ativo == 'renda' else '' }}"
-        >
-            <span>💰</span>
-            Renda
+        <a href="{{ url_for('main.renda') }}" class="{{ 'on' if ativo == 'renda' else '' }}">
+            {{ icone("renda") }} Renda
         </a>
 
-        <a
-            href="{{ url_for('mais') }}"
-            class="{{ 'on' if ativo == 'mais' else '' }}"
-        >
-            <span>⋯</span>
-            Mais
+        <a href="{{ url_for('main.mais') }}" class="{{ 'on' if ativo == 'mais' else '' }}">
+            {{ icone("mais") }} Mais
         </a>
 
     </div>
 </nav>
+{% endif %}
 
 
+<script src="{{ url_for('static', filename='vendor/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='offline.js') }}"></script>
 {% block script %}{% endblock %}
 
 </body>

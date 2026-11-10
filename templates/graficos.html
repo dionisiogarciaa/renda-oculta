@@ -1,99 +1,96 @@
 {% extends "base.html" %}
+{% from "_icones.html" import icone %}
 
 {% block title %}Gráficos{% endblock %}
 
 {% block content %}
 
-    <a class="link" style="padding-top: 0" href="{{ url_for('mais') }}">← Voltar</a>
+    <a class="voltar" href="{{ url_for('main.mais') }}">{{ icone("voltar", 18) }} Voltar</a>
 
-    <h1>Minha produção</h1>
+    <div class="pagina-cab">
+        <h1>Minha produção</h1>
+        <p>Como o valor econômico se divide e quais produtos mais contribuem.</p>
+    </div>
 
     {% if total == 0 %}
 
-        <p class="sub">Cadastre produções para ver os gráficos.</p>
+        <div class="vazio">Cadastre produções para ver os gráficos.</div>
 
     {% else %}
 
-        <h2>Destino da produção</h2>
+        <div class="row g-3">
 
-        <div class="card" style="display: flex; align-items: center; gap: 16px">
+            <div class="col-lg-5">
+                <section class="card-rc">
+                    <div class="card-tit"><h2>Destino da produção</h2><small>% do valor</small></div>
 
-            <div style="position: relative; width: 130px; flex: none">
-
-                <svg viewBox="0 0 42 42" width="130">
-                    {% for f in fatias %}
-                        <circle
-                            cx="21" cy="21" r="15.9" fill="none"
-                            stroke="{{ f.cor }}" stroke-width="6"
-                            stroke-dasharray="{{ '%.2f'|format(f.pct) }} {{ '%.2f'|format(100 - f.pct) }}"
-                            stroke-dashoffset="{{ '%.2f'|format(f.offset) }}"
-                        />
-                    {% endfor %}
-                </svg>
-
-                <div style="
-                    position: absolute; inset: 0;
-                    display: flex; flex-direction: column;
-                    align-items: center; justify-content: center;
-                    text-align: center; line-height: 1.2;
-                ">
-                    <b style="font-size: 13px">R$ {{ "%.0f"|format(total) }}</b>
-                    <small class="sub" style="font-size: 10px">no período</small>
-                </div>
-
-            </div>
-
-            <div class="leg" style="flex-direction: column; margin: 0">
-                {% for f in fatias %}
-                    <span>
-                        <i class="dot" style="background: {{ f.cor }}"></i>
-                        {{ f.nome }} {{ f.pct|round|int }}% (R$ {{ "%.2f"|format(f.valor) }})
-                    </span>
-                {% endfor %}
-            </div>
-
-        </div>
-
-
-        <h2>Valor por destino</h2>
-
-        <div class="card">
-            <svg viewBox="0 0 300 140">
-                {% for f in fatias %}
-                    {% set altura = (f.valor / maior_destino * 80) if maior_destino else 0 %}
-                    <text
-                        x="{{ 43 + loop.index0 * 70 }}" y="{{ 100 - altura - 6 }}"
-                        font-size="11" font-weight="700" text-anchor="middle" fill="var(--tx)"
-                    >R$ {{ "%.0f"|format(f.valor) }}</text>
-                    <rect
-                        x="{{ 20 + loop.index0 * 70 }}"
-                        y="{{ 100 - altura }}"
-                        width="46" height="{{ altura }}" rx="8"
-                        fill="{{ f.cor }}"
-                    />
-                    <text
-                        x="{{ 43 + loop.index0 * 70 }}" y="118"
-                        font-size="10" text-anchor="middle" fill="var(--mut)"
-                    >{{ f.nome[:8] }}</text>
-                {% endfor %}
-            </svg>
-        </div>
-
-
-        <h2>Produção por produto</h2>
-
-        <div class="card">
-            {% for r in ranking %}
-                <div class="hb">
-                    <span>{{ r.nome }}</span>
-                    <div class="t">
-                        <i style="width: {{ (r.valor / maior_produto * 100) if maior_produto else 0 }}%"></i>
+                    <div class="grafico grafico-rosca">
+                        <canvas id="g-rosca" role="img" aria-label="Rosca com o destino da produção"></canvas>
+                        <div class="grafico-centro">
+                            <b>R$ {{ total|brl }}</b>
+                            <small>no período</small>
+                        </div>
                     </div>
-                    <b style="font-size: 14px">R$ {{ "%.2f"|format(r.valor) }}</b>
+
+                    <div class="mt-3">
+                        {% for f in fatias %}
+                            <div class="item-lista py-2">
+                                <i class="dot" style="background: {{ f.cor }}"></i>
+                                <div class="corpo">{{ f.nome }}</div>
+                                <div class="fim">R$ {{ f.valor|brl }} <small>{{ f.pct|round|int }}%</small></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="row g-3">
+
+                    <div class="col-12">
+                        <section class="card-rc">
+                            <div class="card-tit"><h2>Valor por destino</h2><small>R$</small></div>
+                            <div class="grafico"><canvas id="g-barras" role="img" aria-label="Barras com o valor por destino"></canvas></div>
+                        </section>
+                    </div>
+
+                    <div class="col-12">
+                        <section class="card-rc">
+                            <div class="card-tit"><h2>Produção por produto</h2><small>maiores valores</small></div>
+
+                            {% for r in ranking %}
+                                <div class="hb">
+                                    <span>{{ r.nome }}</span>
+                                    <div class="t">
+                                        <i style="width: {{ (r.valor / maior_produto * 100) if maior_produto else 0 }}%"></i>
+                                    </div>
+                                    <b>R$ {{ r.valor|brl }}</b>
+                                </div>
+                            {% endfor %}
+                        </section>
+                    </div>
+
                 </div>
-            {% endfor %}
+            </div>
+
         </div>
 
     {% endif %}
 
+{% endblock %}
+
+
+{% block script %}
+{% if total != 0 %}
+<script src="{{ url_for('static', filename='vendor/chart.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='charts.js') }}"></script>
+<script>
+    // Dados reais vindos do Flask (rota graficos)
+    const fatias = {{ fatias|tojson }};
+    const destinos = fatias.map(function (f) { return [f.nome, f.valor]; });
+
+    RC.rosca("g-rosca", destinos);
+    RC.barras("g-barras", destinos);
+</script>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block title %}Editar produção{% endblock %}
+{% block content %}
+<a class="voltar" href="{{ url_for('producao.listar') }}">{{ icone("voltar", 18) }} Voltar</a>
+<div class="pagina-cab">
+    <h1>Editar produção</h1>
+    <p>{{ p.nome }} · medido em {{ p.rotulo|plural }}</p>
+</div>
+{% set passo = '1' if p.medida == 'unidade' else '0.01' %}
+<div class="auth-card" style="max-width: 560px">
+<section class="card-rc">
+    <form method="POST" action="">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="row g-3">
+            <div class="col-6">
+                <label class="form-label" for="referencia">Mês da produção</label>
+                <input class="form-control" type="month" id="referencia" name="referencia" value="{{ p.referencia }}" required>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="periodo">Período</label>
+                <select class="form-select" id="periodo" name="periodo" required>
+                    {% for chave, (nome, fator) in periodos.items() %}
+                        <option value="{{ chave }}" {{ 'selected' if chave == p.periodo }}>{{ nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12">
+                <label class="form-label" for="total_produzido">Total produzido ({{ p.rotulo|plural }})</label>
+                <input class="form-control" type="number" min="0" step="{{ passo }}" inputmode="decimal" id="total_produzido" name="total_produzido" value="{{ p.total_produzido|qtd }}" required>
+            </div>
+            {% for campo, nome in [('autoconsumo','Autoconsumo'),('trocas','Trocas'),('doacoes','Doações'),('venda','Venda')] %}
+                <div class="col-6">
+                    <label class="form-label" for="{{ campo }}">{{ nome }}</label>
+                    <input class="form-control" type="number" min="0" step="{{ passo }}" inputmode="decimal" id="{{ campo }}" name="{{ campo }}" value="{{ p[campo]|qtd }}" required>
+                </div>
+            {% endfor %}
+            <div class="col-12">
+                <label class="form-label" for="preco">Preço usado (R$ por {{ p.rotulo }})</label>
+                <input class="form-control" id="preco" name="preco" inputmode="decimal" value="{{ p.preco }}" required>
+                <p class="muda pequeno mt-1 mb-0">
+                    Preço de referência na época do registro: R$ {{ (p.preco_ref or p.preco)|brl }}.
+                    Se o seu for diferente, pode ajustar.
+                </p>
+            </div>
+        </div>
+        <button class="btn btn-rc w-100 mt-4" type="submit">Salvar alterações</button>
+    </form>
+</section>
+</div>
+{% endblock %}

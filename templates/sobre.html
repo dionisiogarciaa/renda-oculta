@@ -1,23 +1,41 @@
 {% extends "base.html" %}
+{% from "_icones.html" import icone %}
 
 {% block title %}Sobre{% endblock %}
 
 {% block content %}
 
-    <a class="link" style="padding-top: 0" href="{{ url_for('mais') }}">← Voltar</a>
+    <a class="voltar" href="{{ url_for('main.mais') }}">{{ icone("voltar", 18) }} Voltar</a>
 
-    <h1>Sobre o projeto</h1>
+    <div class="pagina-cab">
+        <h1>Sobre o projeto</h1>
+    </div>
 
-    <div class="card" style="margin-top: 20px">
+    <div class="row g-3">
 
-        <b>Você produz muito mais do que aquilo que vende.</b>
+        <div class="col-lg-7">
+            <section class="card-rc">
+                <p class="sobre-destaque">Você produz muito mais do que aquilo que vende.</p>
+                <p class="muda mb-0">
+                    Renda Oculta transforma o que a família registra em uma visão
+                    clara do valor econômico da produção: autoconsumo, trocas,
+                    doações e venda informal. Os preços de referência vêm do
+                    boletim diário do CEASA.
+                </p>
+            </section>
+        </div>
 
-        <p class="sub">
-            Renda Oculta transforma o que a família registra em uma visão
-            clara do valor econômico da produção: autoconsumo, trocas,
-            doações e venda informal. Os preços de referência vêm do
-            boletim diário do CEASA.
-        </p>
+        <div class="col-lg-5">
+            <section class="card-rc">
+                <div class="card-tit"><h2>Destinos da produção</h2></div>
+                <ul class="sobre-passos">
+                    <li><i class="dot" style="background: var(--cor-venda)"></i><span><b>Venda</b> &mdash; o que vira dinheiro.</span></li>
+                    <li><i class="dot" style="background: var(--cor-autoconsumo)"></i><span><b>Autoconsumo</b> &mdash; o que alimenta a família.</span></li>
+                    <li><i class="dot" style="background: var(--cor-trocas)"></i><span><b>Trocas</b> &mdash; o que é trocado entre famílias.</span></li>
+                    <li><i class="dot" style="background: var(--cor-doacoes)"></i><span><b>Doações</b> &mdash; o que é dado a quem precisa.</span></li>
+                </ul>
+            </section>
+        </div>
 
     </div>
 

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block title %}Visão agregada{% endblock %}
+{% block content %}
+<a class="voltar" href="{{ url_for('main.mais') }}">{{ icone("voltar", 18) }} Voltar</a>
+<div class="pagina-cab">
+    <h1>Visão agregada</h1>
+    <p>Dados somados e anônimos das famílias, para cooperativas, associações e extensionistas.</p>
+</div>
+
+{% if not d.liberado %}
+    <div class="nota">Há {{ d.familias }} família(s) com registros. Para proteger o anonimato, os números só aparecem com pelo menos {{ d.minimo }} famílias.</div>
+{% else %}
+    <div class="row g-3">
+        <div class="col-6 col-lg-3"><div class="kpi"><span class="rot">Famílias</span><span class="val">{{ d.familias }}</span></div></div>
+        <div class="col-6 col-lg-3"><div class="kpi"><span class="rot">Valor econômico <span class="estimado">estimado</span></span><span class="val"><small>R$</small>{{ d.totais.renda_oculta|brl }}</span></div></div>
+        <div class="col-6 col-lg-3"><div class="kpi"><span class="rot">Renda monetária</span><span class="val"><small>R$</small>{{ d.totais.total_venda|brl }}</span></div></div>
+        <div class="col-6 col-lg-3"><div class="kpi"><span class="rot">Fora do caixa</span><span class="val">{{ 100 - d.totais.pct_venda }}%</span></div></div>
+    </div>
+    <div class="row g-3 mt-0">
+        <div class="col-lg-6"><section class="card-rc">
+            <div class="card-tit"><h2>Produtos com maior valor</h2></div>
+            {% for nome, valor in d.produtos %}
+                <div class="item-lista"><div class="corpo"><b>{{ nome }}</b></div><div class="fim">R$ {{ valor|brl }}</div></div>
+            {% endfor %}
+        </section></div>
+        <div class="col-lg-6"><section class="card-rc">
+            <div class="card-tit"><h2>Por município</h2><small>só grupos com {{ d.minimo }}+ famílias</small></div>
+            {% for nome, fam, valor in d.municipios %}
+                <div class="item-lista"><div class="corpo"><b>{{ nome }}</b><small>{{ fam }} famílias</small></div><div class="fim">R$ {{ valor|brl }}</div></div>
+            {% else %}
+                <div class="vazio">Nenhum município com famílias suficientes.</div>
+            {% endfor %}
+        </section></div>
+    </div>
+{% endif %}
+{% endblock %}

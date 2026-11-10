@@ -1,110 +1,246 @@
 {% extends "base.html" %}
+{% from "_icones.html" import icone %}
 
 {% block title %}Início{% endblock %}
 
 {% block content %}
 
-    <h1>Olá! 👋</h1>
+    {% if lembrar %}
+        <div class="nota mb-3">
+            <b>Lembrete:</b> você ainda não registrou a produção deste mês.
+            <a class="fw-bold" href="{{ url_for('producao.listar') }}">Registrar agora</a>
+        </div>
+    {% endif %}
 
-    <p class="sub">Veja o valor que sua produção gera.</p>
+    <div class="pagina-cab d-flex flex-wrap justify-content-between align-items-end gap-3">
+        <div>
+            <h1>Visão geral da produção</h1>
+            <p>O valor que a sua produção gera, mesmo quando não passa pelo caixa.</p>
+        </div>
+        <div class="d-flex align-items-end gap-2">
+            <form method="GET" action="{{ url_for('main.home') }}">
+                <label class="form-label mb-1" for="mes">Período</label>
+                <select class="form-select seletor-mes" id="mes" name="mes" onchange="this.form.submit()">
+                    <option value="acumulado" {{ 'selected' if mes == 'acumulado' }}>Acumulado</option>
+                    {% for valor, nome in meses %}<option value="{{ valor }}" {{ 'selected' if valor == mes }}>{{ nome|capitalize }}</option>{% endfor %}
+                </select>
+                <noscript><button class="btn btn-rc-sec btn-sm mt-2" type="submit">Ver</button></noscript>
+            </form>
+            <a class="btn btn-rc" href="{{ url_for('producao.listar') }}">
+                {{ icone("mais-sinal", 18) }} Registrar produção
+            </a>
+        </div>
+    </div>
 
 
-    <div class="card hero" style="margin-top: 14px">
+    {# ---------------- Produção total + indicadores principais ---------------- #}
 
-        <p>Valor econômico gerado</p>
+    <div class="row g-3">
 
-        <div class="big">R$ {{ "%.2f"|format(renda_oculta) }}</div>
+        <div class="col-lg-7">
+            <section class="painel" aria-label="Produção total">
 
-        <p>estimativa mensal &middot; soma de todas as produções</p>
+                <div>
+                    <p class="painel-rotulo">Produção total</p>
+                    <div class="painel-valor"><small>R$</small>{{ producao_total|brl }}</div>
+                    <p class="painel-nota">
+                        {{ n_producoes }} produç{{ 'ão' if n_producoes == 1 else 'ões' }}
+                        de {{ n_produtos }} produto{{ '' if n_produtos == 1 else 's' }},
+                        em equivalente mensal e preços do CEASA
+                    </p>
+                </div>
+
+                <div>
+                    <div class="barra" role="img" aria-label="Destino da produção">
+                        <i style="flex: {{ total_autoconsumo }}; background: var(--cor-autoconsumo)"></i>
+                        <i style="flex: {{ total_trocas }}; background: var(--cor-trocas)"></i>
+                        <i style="flex: {{ total_doacoes }}; background: var(--cor-doacoes)"></i>
+                        <i style="flex: {{ total_venda }}; background: var(--cor-venda)"></i>
+                    </div>
+                    <div class="legenda">
+                        <span><i class="dot" style="background: var(--cor-autoconsumo)"></i> Autoconsumo {{ pct_autoconsumo }}%</span>
+                        <span><i class="dot" style="background: var(--cor-trocas)"></i> Trocas {{ pct_trocas }}%</span>
+                        <span><i class="dot" style="background: var(--cor-doacoes)"></i> Doações {{ pct_doacoes }}%</span>
+                        <span><i class="dot" style="background: var(--cor-venda)"></i> Venda {{ pct_venda }}%</span>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="row g-3 h-100">
+
+                <div class="col-12 col-sm-6 col-lg-12">
+                    <div class="kpi kpi-grande">
+                        <span class="rot">{{ icone("renda", 18) }} Renda monetária</span>
+                        <span class="val"><small>R$</small>{{ total_venda|brl }}</span>
+                        <p class="sub">dinheiro recebido com vendas</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-12">
+                    <div class="kpi kpi-grande kpi-destaque">
+                        <span class="rot">{{ icone("producao", 18) }} Valor econômico total <span class="estimado">estimado</span></span>
+                        <span class="val"><small>R$</small>{{ renda_oculta|brl }}</span>
+                        <p class="sub">venda, autoconsumo, trocas e doações</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 
 
-    <div class="grid">
+    {# ---------------- Indicadores por destino ---------------- #}
 
-        <div class="kpi">
-            <span><i class="dot" style="background: var(--cor-venda)"></i> Venda</span>
-            <b>R$ {{ "%.2f"|format(total_venda) }}</b>
+    <div class="row g-3 mt-0">
+
+        <div class="col-6 col-lg-3">
+            <div class="kpi">
+                <span class="rot"><i class="dot" style="background: var(--cor-venda)"></i> Venda</span>
+                <span class="val"><small>R$</small>{{ total_venda|brl }}</span>
+            </div>
         </div>
 
-        <div class="kpi">
-            <span><i class="dot" style="background: var(--cor-autoconsumo)"></i> Autoconsumo</span>
-            <b>R$ {{ "%.2f"|format(total_autoconsumo) }}</b>
+        <div class="col-6 col-lg-3">
+            <div class="kpi">
+                <span class="rot"><i class="dot" style="background: var(--cor-autoconsumo)"></i> Autoconsumo</span>
+                <span class="val"><small>R$</small>{{ total_autoconsumo|brl }}</span>
+            </div>
         </div>
 
-        <div class="kpi">
-            <span><i class="dot" style="background: var(--cor-trocas)"></i> Trocas</span>
-            <b>R$ {{ "%.2f"|format(total_trocas) }}</b>
+        <div class="col-6 col-lg-3">
+            <div class="kpi">
+                <span class="rot"><i class="dot" style="background: var(--cor-trocas)"></i> Trocas</span>
+                <span class="val"><small>R$</small>{{ total_trocas|brl }}</span>
+            </div>
         </div>
 
-        <div class="kpi">
-            <span><i class="dot" style="background: var(--cor-doacoes)"></i> Doações</span>
-            <b>R$ {{ "%.2f"|format(total_doacoes) }}</b>
-        </div>
-
-    </div>
-
-
-    <h2>Como sua produção circulou?</h2>
-
-    <div class="card">
-
-        <div class="bar">
-            <i style="flex: {{ total_autoconsumo }}; background: var(--cor-autoconsumo)"></i>
-            <i style="flex: {{ total_trocas }}; background: var(--cor-trocas)"></i>
-            <i style="flex: {{ total_doacoes }}; background: var(--cor-doacoes)"></i>
-            <i style="flex: {{ total_venda }}; background: var(--cor-venda)"></i>
-        </div>
-
-        <div class="leg">
-            <span><i class="dot" style="background: var(--cor-autoconsumo)"></i> Autoconsumo {{ pct_autoconsumo }}%</span>
-            <span><i class="dot" style="background: var(--cor-trocas)"></i> Trocas {{ pct_trocas }}%</span>
-            <span><i class="dot" style="background: var(--cor-doacoes)"></i> Doações {{ pct_doacoes }}%</span>
-            <span><i class="dot" style="background: var(--cor-venda)"></i> Venda {{ pct_venda }}%</span>
+        <div class="col-6 col-lg-3">
+            <div class="kpi">
+                <span class="rot"><i class="dot" style="background: var(--cor-doacoes)"></i> Doações</span>
+                <span class="val"><small>R$</small>{{ total_doacoes|brl }}</span>
+            </div>
         </div>
 
     </div>
 
 
-    <a class="btn" style="margin-top: 20px" href="{{ url_for('producao') }}">
-        + Registrar produção
-    </a>
+    {# ---------------- Gráficos ---------------- #}
+
+    <div class="row g-3 mt-0">
+
+        <div class="col-lg-5">
+            <section class="card-rc">
+                <div class="card-tit"><h2>Produção por destino</h2><small>% do valor</small></div>
+
+                {% if renda_oculta %}
+                    <div class="grafico grafico-rosca">
+                        <canvas id="g-rosca" role="img" aria-label="Rosca com a distribuição da produção por destino"></canvas>
+                        <div class="grafico-centro">
+                            <b>R$ {{ renda_oculta|brl }}</b>
+                            <small>valor econômico</small>
+                        </div>
+                    </div>
+                    <div class="legenda justify-content-center">
+                        <span><i class="dot" style="background: var(--cor-venda)"></i> Venda</span>
+                        <span><i class="dot" style="background: var(--cor-autoconsumo)"></i> Autoconsumo</span>
+                        <span><i class="dot" style="background: var(--cor-trocas)"></i> Trocas</span>
+                        <span><i class="dot" style="background: var(--cor-doacoes)"></i> Doações</span>
+                    </div>
+                {% else %}
+                    <div class="vazio">Registre uma produção para ver a distribuição por destino.</div>
+                {% endif %}
+            </section>
+        </div>
+
+        <div class="col-lg-7">
+            <section class="card-rc">
+                <div class="card-tit"><h2>Valor econômico por destino</h2><small>R$ por mês</small></div>
+
+                {% if renda_oculta %}
+                    <div class="grafico"><canvas id="g-barras" role="img" aria-label="Barras com o valor econômico por destino"></canvas></div>
+                {% else %}
+                    <div class="vazio">Os valores aparecem aqui assim que houver produções.</div>
+                {% endif %}
+            </section>
+        </div>
+
+        <div class="col-lg-7">
+            <section class="card-rc">
+                <div class="card-tit"><h2>Evolução da produção</h2><small>valor econômico por mês</small></div>
+
+                {% if graficos.evolucao %}
+                    <div class="grafico"><canvas id="g-linha" role="img" aria-label="Linha com a evolução do valor da produção"></canvas></div>
+                    {% if graficos.evolucao|length == 1 %}
+                        <p class="muda pequeno mt-2 mb-0">Registre produções de outros meses para ver a linha.</p>
+                    {% endif %}
+                {% else %}
+                    <div class="vazio">A evolução aparece depois do primeiro registro.</div>
+                {% endif %}
+            </section>
+        </div>
+
+        <div class="col-lg-5">
+            <section class="card-rc">
+                <div class="card-tit"><h2>Produtos produzidos</h2><small>valor por produto</small></div>
+
+                {% if graficos.produtos %}
+                    <div class="grafico"><canvas id="g-produtos" role="img" aria-label="Barras com o valor por produto"></canvas></div>
+                {% else %}
+                    <div class="vazio">Nenhum produto registrado ainda.</div>
+                {% endif %}
+            </section>
+        </div>
+
+    </div>
 
 
-    <h2>Últimas produções</h2>
+    {# ---------------- Últimas produções ---------------- #}
 
-    {% if ultimas %}
+    <section class="card-rc mt-3">
+        <div class="card-tit">
+            <h2>Últimas produções</h2>
+            {% if ultimas %}<a class="pequeno fw-semibold" href="{{ url_for('producao.listar') }}">Ver todas</a>{% endif %}
+        </div>
 
-        <div class="card" style="padding: 4px 18px">
-
+        {% if ultimas %}
             {% for p in ultimas %}
-
-                <div class="row">
-
-                    <span class="em">🌱</span>
-
-                    <div>
+                <div class="item-lista">
+                    <span class="icone">{{ icone("producao", 20) }}</span>
+                    <div class="corpo">
                         <b>{{ p.nome }}</b>
                         <small>
                             {{ p.total_produzido|qtd }} {{ p.rotulo|plural }}
-                            &middot; R$ {{ "%.2f"|format(p.preco) }} / {{ p.rotulo }}
+                            &middot; R$ {{ p.preco|brl }} / {{ p.rotulo }}
                         </small>
                     </div>
-
-                    <small class="r">{{ p.data_cadastro }}</small>
-
+                    <div class="fim">
+                        R$ {{ p.valor_total|brl }}
+                        <small>{{ p.data_cadastro }}</small>
+                    </div>
                 </div>
-
             {% endfor %}
+        {% else %}
+            <div class="vazio">Nenhuma produção cadastrada ainda.</div>
+        {% endif %}
+    </section>
 
-        </div>
+{% endblock %}
 
-        <a class="link" href="{{ url_for('producao') }}">Ver todas</a>
 
-    {% else %}
+{% block script %}
+<script src="{{ url_for('static', filename='vendor/chart.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='charts.js') }}"></script>
+<script>
+    // Dados reais vindos do Flask (rota home)
+    const dados = {{ graficos|tojson }};
 
-        <p class="sub">Nenhuma produção cadastrada ainda.</p>
-
-    {% endif %}
-
+    RC.rosca("g-rosca", dados.destinos);
+    RC.barras("g-barras", dados.destinos);
+    RC.linha("g-linha", dados.evolucao);
+    RC.produtos("g-produtos", dados.produtos);
+</script>
 {% endblock %}

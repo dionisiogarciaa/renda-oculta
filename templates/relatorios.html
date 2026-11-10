@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block title %}Relatórios{% endblock %}
+{% block content %}
+<a class="voltar" href="{{ url_for('main.mais') }}">{{ icone("voltar", 18) }} Voltar</a>
+<div class="pagina-cab d-flex flex-wrap justify-content-between align-items-end gap-3">
+    <div>
+        <h1>Relatórios</h1>
+        <p>Produção, valor econômico e comparação entre meses.</p>
+    </div>
+    <form method="GET" class="seletor-mes w-100" style="max-width: 240px">
+        <label class="form-label" for="mes">Período</label>
+        <select class="form-select" id="mes" name="mes" onchange="this.form.submit()">
+            <option value="acumulado" {{ 'selected' if mes == 'acumulado' }}>Acumulado</option>
+            {% for valor, nome in meses %}<option value="{{ valor }}" {{ 'selected' if valor == mes }}>{{ nome }}</option>{% endfor %}
+        </select>
+        <noscript><button class="btn btn-rc-sec btn-sm mt-2" type="submit">Ver</button></noscript>
+    </form>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="kpi kpi-grande kpi-destaque">
+            <span class="rot">Valor econômico total <span class="estimado">estimado</span></span>
+            <span class="val"><small>R$</small>{{ totais.renda_oculta|brl }}</span>
+            <p class="sub">{{ titulo }} · {{ n }} produç{{ 'ão' if n == 1 else 'ões' }}</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="kpi kpi-grande">
+            <span class="rot">Renda monetária (venda)</span>
+            <span class="val"><small>R$</small>{{ totais.total_venda|brl }}</span>
+            <p class="sub">dinheiro recebido com vendas</p>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-wrap gap-2 mt-3">
+    <a class="btn btn-rc" href="{{ url_for('relatorios.pdf', mes=mes) }}">Gerar PDF</a>
+    <a class="btn btn-rc-sec" href="{{ whatsapp }}" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+</div>
+
+<section class="card-rc mt-3">
+    <div class="card-tit"><h2>Comparação entre meses</h2><small>valores estimados</small></div>
+    {% if resumo %}
+        <div class="grafico"><canvas id="g-meses" role="img" aria-label="Barras comparando o valor econômico e a renda monetária de cada mês"></canvas></div>
+        <div class="tabela-wrap mt-3">
+            <table class="table">
+                <thead><tr><th>Mês</th><th>Produções</th><th>Valor econômico</th><th>Renda monetária</th><th>Variação</th></tr></thead>
+                <tbody>
+                {% for m in resumo %}
+                    <tr>
+                        <td>{{ m.nome|capitalize }}</td><td>{{ m.n }}</td>
+                        <td>R$ {{ m.valor|brl }}</td><td>R$ {{ m.venda|brl }}</td>
+                        <td>{{ '—' if m.variacao is none else ('%+.0f%%' % m.variacao) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="vazio">Registre produções para comparar os meses.</div>
+    {% endif %}
+</section>
+
+<div class="nota mt-3">Autoconsumo, trocas e doações são <b>estimados</b> (quantidade × preço de referência) e não são dinheiro recebido.</div>
+{% endblock %}
+
+{% block script %}
+{% if resumo %}
+<script src="{{ url_for('static', filename='vendor/chart.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='charts.js') }}"></script>
+<script>
+    const meses = {{ grafico|tojson }};
+    RC.comparar("g-meses", meses);
+</script>
+{% endif %}
+{% endblock %}

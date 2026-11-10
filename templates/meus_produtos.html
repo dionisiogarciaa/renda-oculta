@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block title %}Meus produtos{% endblock %}
+{% block content %}
+<a class="voltar" href="{{ url_for('main.mais') }}">{{ icone("voltar", 18) }} Voltar</a>
+<div class="pagina-cab">
+    <h1>Meus produtos</h1>
+    <p>Crie produtos, unidades e preços que não estão na tabela do CEASA.</p>
+</div>
+<div class="row g-3">
+    <div class="col-lg-5">
+        <section class="card-rc">
+            <div class="card-tit"><h2>Novo produto</h2></div>
+            <form method="POST" action="{{ url_for('meus.criar') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="mb-3">
+                    <label class="form-label" for="nome">Nome do produto</label>
+                    <input class="form-control" id="nome" name="nome" maxlength="100" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="rotulo">Unidade de medida</label>
+                    <select class="form-select" id="rotulo" name="rotulo" required>
+                        {% for u in unidades %}<option value="{{ u }}">{{ u }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="preco">Preço por unidade (R$)</label>
+                    <input class="form-control" id="preco" name="preco" inputmode="decimal" placeholder="0,00" required>
+                </div>
+                <button class="btn btn-rc w-100" type="submit">{{ icone("mais-sinal", 18) }} Criar produto</button>
+            </form>
+        </section>
+    </div>
+    <div class="col-lg-7">
+        <section class="card-rc">
+            <div class="card-tit"><h2>Meus produtos</h2></div>
+            {% for i in itens %}
+                <div class="item-lista">
+                    <span class="icone">{{ icone("producao", 20) }}</span>
+                    <div class="corpo"><b>{{ i.nome }}</b><small>R$ {{ i.preco_unit|brl }} / {{ i.rotulo }}</small></div>
+                    <form method="POST" action="{{ url_for('meus.excluir', item_id=i.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="btn btn-rc-sec btn-sm" type="submit" aria-label="Remover {{ i.nome }}">{{ icone("lixo", 16) }}</button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="vazio">Você ainda não criou nenhum produto.</div>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+{% endblock %}

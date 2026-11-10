@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block title %}Perfil{% endblock %}
+{% block content %}
+<a class="voltar" href="{{ url_for('main.mais') }}">{{ icone("voltar", 18) }} Voltar</a>
+<div class="pagina-cab">
+    <h1>Perfil</h1>
+    <p>Conta: {{ g.user.login }}</p>
+</div>
+<div class="row g-3">
+    <div class="col-lg-7">
+        <section class="card-rc">
+            <form method="POST" action="{{ url_for('perfil.ver') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="mb-3">
+                    <label class="form-label" for="nome">Nome</label>
+                    <input class="form-control" id="nome" name="nome" value="{{ g.user.nome }}" required>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="comunidade">Comunidade</label>
+                        <input class="form-control" id="comunidade" name="comunidade" value="{{ g.user.comunidade or '' }}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label" for="municipio">Município</label>
+                        <input class="form-control" id="municipio" name="municipio" value="{{ g.user.municipio or '' }}">
+                    </div>
+                </div>
+                <h2 class="mt-4 mb-2">Lembrete mensal</h2>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" role="switch" id="lembrete_ativo" name="lembrete_ativo" value="1" {{ 'checked' if g.user.lembrete_ativo }}>
+                    <label class="form-check-label" for="lembrete_ativo">Lembrar de registrar a produção do mês</label>
+                </div>
+                <label class="form-label" for="lembrete_dia">A partir do dia</label>
+                <input class="form-control seletor-mes mb-3" id="lembrete_dia" name="lembrete_dia" type="number" min="1" max="28" value="{{ g.user.lembrete_dia }}">
+                <p class="muda pequeno">O lembrete aparece no Início enquanto não houver registro no mês.</p>
+                <button class="btn btn-rc" type="submit">Salvar</button>
+            </form>
+        </section>
+    </div>
+    <div class="col-lg-5">
+        <section class="card-rc">
+            <div class="card-tit"><h2>Meus dados</h2></div>
+            <a class="btn btn-rc-sec w-100 mb-2" href="{{ url_for('perfil.exportar') }}">Baixar meus dados (JSON)</a>
+            <button class="btn btn-rc-perigo w-100 mb-2" type="button" data-bs-toggle="modal" data-bs-target="#modal-excluir-conta">Excluir minha conta</button>
+            <form method="POST" action="{{ url_for('auth.sair') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn btn-rc-sec w-100" type="submit">Sair da conta</button>
+            </form>
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-excluir-conta" tabindex="-1" aria-labelledby="t-excluir-conta" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+        <form method="POST" action="{{ url_for('perfil.excluir') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="t-excluir-conta">Excluir a conta?</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <p>Todas as suas produções e produtos serão apagados. Isso não pode ser desfeito.</p>
+                <label class="form-label" for="senha-excluir">Digite sua senha para confirmar</label>
+                <input class="form-control" id="senha-excluir" name="senha" type="password" autocomplete="current-password" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rc-sec" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-rc-perigo">Excluir tudo</button>
+            </div>
+        </form>
+    </div></div>
+</div>
+{% endblock %}

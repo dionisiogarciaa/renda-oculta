@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Ops{% endblock %}
+{% block content %}
+<div class="pagina-cab">
+    <h1>{{ 'Página não encontrada' if erro.code == 404 else ('Sem permissão' if erro.code == 403 else 'Algo deu errado') }}</h1>
+    <p>{{ erro.description if erro.code != 404 else 'O endereço não existe ou não pertence à sua conta.' }}</p>
+</div>
+<a class="btn btn-rc" href="{{ url_for('main.home') }}">Voltar ao início</a>
+{% endblock %}

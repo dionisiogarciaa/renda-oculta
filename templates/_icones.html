@@ -1,0 +1,20 @@
+{# Ícones em SVG (traço), herdam a cor do texto. Uso: {{ icone("home") }} #}
+{% macro icone(nome, tam=22) -%}
+<svg class="ico" width="{{ tam }}" height="{{ tam }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+{%- if nome == "home" %}<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>
+{%- elif nome == "producao" %}<path d="M12 21v-9"/><path d="M12 12c0-3.5-2.5-6-6.5-6 0 3.8 2.5 6 6.5 6Z"/><path d="M12 14.5c0-3 2-5.5 6-5.5 0 3.5-2.2 5.5-6 5.5Z"/>
+{%- elif nome == "renda" %}<circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.6-.8-1.6-1.2-2.8-1.2-1.6 0-2.8.8-2.8 2s1.1 1.7 2.8 2c1.7.3 2.8.8 2.8 2s-1.2 2-2.8 2c-1.2 0-2.3-.4-2.9-1.2"/><path d="M12 6.5V8m0 8v1.5"/>
+{%- elif nome == "mais" %}<rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/>
+{%- elif nome == "grafico" %}<path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 15l3.5-4 3 2.5L19 7"/>
+{%- elif nome == "tabela" %}<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 10h17M9.5 10v9.5"/>
+{%- elif nome == "info" %}<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8v.2"/>
+{%- elif nome == "busca" %}<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/>
+{%- elif nome == "mais-sinal" %}<path d="M12 5v14M5 12h14"/>
+{%- elif nome == "voltar" %}<path d="M15 5l-7 7 7 7"/>
+{%- elif nome == "seta" %}<path d="M9 5l7 7-7 7"/>
+{%- elif nome == "lixo" %}<path d="M5 7h14M10 7V4.5h4V7M7 7l1 12.5h8L17 7"/>
+{%- elif nome == "reiniciar" %}<path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 4v4.5h-4.5"/>
+{%- elif nome == "folha" %}<path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19c2-4 5-7 9-9"/>
+{%- endif -%}
+</svg>
+{%- endmacro %}

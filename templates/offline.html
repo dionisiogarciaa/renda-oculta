@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Sem conexão{% endblock %}
+{% block content %}
+<div class="pagina-cab">
+    <h1>Você está sem internet</h1>
+    <p>Essa página ainda não foi aberta neste aparelho. Os registros feitos na tela
+       de Produção ficam guardados e são enviados quando a conexão voltar.</p>
+</div>
+<a class="btn btn-rc" href="{{ url_for('producao.listar') }}">Ir para Produção</a>
+{% endblock %}
