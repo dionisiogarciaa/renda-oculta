@@ -8,7 +8,16 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-
+try:
+    from renda.filters import qtd, plural
+    app.jinja_env.filters['qtd'] = qtd
+    app.jinja_env.filters['plural'] = plural
+except ImportError:
+    # Caso o Python se perca nas pastas, definimos funções básicas de segurança para não quebrar o Render
+    def qtd(val): return val
+    def plural(val): return val
+    app.jinja_env.filters['qtd'] = qtd
+    app.jinja_env.filters['plural'] = plural
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///renda.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
